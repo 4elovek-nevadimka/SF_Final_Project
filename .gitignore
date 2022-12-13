@@ -1,9 +1,2 @@
 __pycache__
-# .env.dev
-# .env.dev.db
-app/.idea/.gitignore
-app/.idea/app.iml
-app/.idea/misc.xml
-app/.idea/modules.xml
-app/.idea/inspectionProfiles/profiles_settings.xml
-app/.idea/inspectionProfiles/Project_Default.xml
+**/.idea/
