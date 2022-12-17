@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'silant',
+    'silant.apps.SilantConfig',
 ]
 
 MIDDLEWARE = [
