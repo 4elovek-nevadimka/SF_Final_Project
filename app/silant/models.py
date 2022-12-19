@@ -57,11 +57,11 @@ class Machine(models.Model):
     # Комплектация (доп. опции)
     equipment = models.CharField(max_length=512, verbose_name='Комплектация (доп. опции)')
     # Клиент
-    client = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name='client', on_delete=models.DO_NOTHING, verbose_name='Клиент')
+    client = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='client',
+                               on_delete=models.DO_NOTHING, verbose_name='Клиент')
     # Сервисная компания
-    service_company = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name='service_company', on_delete=models.DO_NOTHING, verbose_name='Сервисная компания')
+    service_company = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='service_company',
+                                        on_delete=models.DO_NOTHING, verbose_name='Сервисная компания')
 
     class Meta:
         verbose_name = 'Машина'
@@ -126,6 +126,7 @@ class Claim(models.Model):
 
     def __str__(self):
         return f'{self.machine.vehicle_model} - {self.failure_node}'
+
 
 # Справочники
 

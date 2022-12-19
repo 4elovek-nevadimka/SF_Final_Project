@@ -1,8 +1,10 @@
 from django.core.management import BaseCommand
 
-from .lookups_commands import fill_lookup_table
-from .lookups_data import *
-from silant.models import *
+from silant.models import VehicleModel, EngineModel, TransmissionModel, User, RecoveryMethod, FailureNode, \
+    MaintenanceType, SteeringBridgeModel, DriveAxleModel
+from .lookups_commands import fill_lookup_table, fill_user_lookup_table
+from .lookups_data import vehicle_models, engine_models, transmission_models, drive_axle_models, \
+    steering_bridge_models, maintenance_types, failure_nodes, recovery_methods, clients, service_companies, managers
 
 
 class Command(BaseCommand):
@@ -11,22 +13,33 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.stdout.write('Инициализация базы данных тестовым набором данных...')
-        # Справочники для сущности "Машина"
+
+        # Справочники для сущности 'Машина'
         fill_lookup_table(
-            VehicleModel, vehicle_models, self, "Модель техники")
+            VehicleModel, vehicle_models, self, 'Модель техники')
         fill_lookup_table(
-            EngineModel, engine_models, self, "Модель двигателя")
+            EngineModel, engine_models, self, 'Модель двигателя')
         fill_lookup_table(
-            TransmissionModel, transmission_models, self, "Модель трансмиссии")
+            TransmissionModel, transmission_models, self, 'Модель трансмиссии')
         fill_lookup_table(
-            DriveAxleModel, drive_axle_models, self, "Модель ведущего моста")
+            DriveAxleModel, drive_axle_models, self, 'Модель ведущего моста')
         fill_lookup_table(
-            SteeringBridgeModel, steering_bridge_models, self, "Модель управляемого моста")
-        # Справочники для сущности "Техническое обслуживание (ТО)"
+            SteeringBridgeModel, steering_bridge_models, self, 'Модель управляемого моста')
+
+        # Справочники для сущности 'Техническое обслуживание (ТО)'
         fill_lookup_table(
-            MaintenanceType, maintenance_types, self, "Вид ТО")
-        # Справочники для сущности "Рекламация"
+            MaintenanceType, maintenance_types, self, 'Вид ТО')
+
+        # Справочники для сущности 'Рекламация'
         fill_lookup_table(
-            FailureNode, failure_nodes, self, "Узел отказа")
+            FailureNode, failure_nodes, self, 'Узел отказа')
         fill_lookup_table(
-            RecoveryMethod, recovery_methods, self, "Способ восстановления")
+            RecoveryMethod, recovery_methods, self, 'Способ восстановления')
+
+        # Справочники пользователей
+        fill_user_lookup_table(
+            User, clients, self, 'Пользователи: клиенты')
+        fill_user_lookup_table(
+            User, service_companies, self, 'Пользователи: сервисные компании')
+        fill_user_lookup_table(
+            User, managers, self, 'Пользователи: менеджеры')
