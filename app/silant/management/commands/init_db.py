@@ -1,0 +1,32 @@
+from django.core.management import BaseCommand
+
+from .lookups_commands import fill_lookup_table
+from .lookups_data import *
+from silant.models import *
+
+
+class Command(BaseCommand):
+    help = 'Команда для заполнения БД тестовым набором данных'
+    requires_migrations_checks = True
+
+    def handle(self, *args, **options):
+        self.stdout.write('Инициализация базы данных тестовым набором данных...')
+        # Справочники для сущности "Машина"
+        fill_lookup_table(
+            VehicleModel, vehicle_models, self, "Модель техники")
+        fill_lookup_table(
+            EngineModel, engine_models, self, "Модель двигателя")
+        fill_lookup_table(
+            TransmissionModel, transmission_models, self, "Модель трансмиссии")
+        fill_lookup_table(
+            DriveAxleModel, drive_axle_models, self, "Модель ведущего моста")
+        fill_lookup_table(
+            SteeringBridgeModel, steering_bridge_models, self, "Модель управляемого моста")
+        # Справочники для сущности "Техническое обслуживание (ТО)"
+        fill_lookup_table(
+            MaintenanceType, maintenance_types, self, "Вид ТО")
+        # Справочники для сущности "Рекламация"
+        fill_lookup_table(
+            FailureNode, failure_nodes, self, "Узел отказа")
+        fill_lookup_table(
+            RecoveryMethod, recovery_methods, self, "Способ восстановления")
