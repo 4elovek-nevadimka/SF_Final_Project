@@ -243,6 +243,13 @@ service_companies = [
         'description': 'Описание для ООО "ФНС"',
         'role': 'SC',
     },
+    {
+        'username': 'user_sc_4',
+        'password': '1',
+        'name': 'самостоятельно',
+        'description': 'Описание для самостоятельно',
+        'role': 'SC',
+    },
 ]
 
 managers = [
@@ -261,3 +268,13 @@ managers = [
         'role': 'MN',
     },
 ]
+
+
+# Разрешения для групп: клиент, сервисная компания, менеджер
+
+
+client_permission_list = ()
+
+service_company_permission_list = ()
+
+manager_permission_list = ()

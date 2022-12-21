@@ -2,9 +2,10 @@ from django.core.management import BaseCommand
 
 from silant.models import VehicleModel, EngineModel, TransmissionModel, User, RecoveryMethod, FailureNode, \
     MaintenanceType, SteeringBridgeModel, DriveAxleModel
-from .lookups_commands import fill_lookup_table, fill_user_lookup_table
+from .lookups_commands import fill_lookup_table, fill_user_lookup_table, create_group
 from .lookups_data import vehicle_models, engine_models, transmission_models, drive_axle_models, \
-    steering_bridge_models, maintenance_types, failure_nodes, recovery_methods, clients, service_companies, managers
+    steering_bridge_models, maintenance_types, failure_nodes, recovery_methods, clients, service_companies, managers, \
+    client_permission_list, manager_permission_list, service_company_permission_list
 
 
 class Command(BaseCommand):
@@ -13,6 +14,22 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.stdout.write('Инициализация базы данных тестовым набором данных...')
+
+        # Группы и разрешения
+        create_group(
+            'Client', client_permission_list, self)
+        create_group(
+            'Service company', service_company_permission_list, self)
+        create_group(
+            'Manager', manager_permission_list, self)
+
+        # Справочники пользователей
+        fill_user_lookup_table(
+            User, clients, self, 'Пользователи: клиенты')
+        fill_user_lookup_table(
+            User, service_companies, self, 'Пользователи: сервисные компании')
+        fill_user_lookup_table(
+            User, managers, self, 'Пользователи: менеджеры')
 
         # Справочники для сущности 'Машина'
         fill_lookup_table(
@@ -36,10 +53,4 @@ class Command(BaseCommand):
         fill_lookup_table(
             RecoveryMethod, recovery_methods, self, 'Способ восстановления')
 
-        # Справочники пользователей
-        fill_user_lookup_table(
-            User, clients, self, 'Пользователи: клиенты')
-        fill_user_lookup_table(
-            User, service_companies, self, 'Пользователи: сервисные компании')
-        fill_user_lookup_table(
-            User, managers, self, 'Пользователи: менеджеры')
+        # Экспорт тестовых данных по сущностям Машина, Техническое обслуживание (ТО), Рекламация
