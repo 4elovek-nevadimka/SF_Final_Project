@@ -1,8 +1,11 @@
+import os
+
 from django.core.management import BaseCommand
 
+from final_project import settings
 from silant.models import VehicleModel, EngineModel, TransmissionModel, User, RecoveryMethod, FailureNode, \
     MaintenanceType, SteeringBridgeModel, DriveAxleModel
-from .lookups_commands import fill_lookup_table, fill_user_lookup_table, create_group
+from .lookups_commands import fill_lookup_table, fill_user_lookup_table, create_group, read_csv_file
 from .lookups_data import vehicle_models, engine_models, transmission_models, drive_axle_models, \
     steering_bridge_models, maintenance_types, failure_nodes, recovery_methods, clients, service_companies, managers, \
     client_permission_list, manager_permission_list, service_company_permission_list
@@ -54,3 +57,11 @@ class Command(BaseCommand):
             RecoveryMethod, recovery_methods, self, 'Способ восстановления')
 
         # Экспорт тестовых данных по сущностям Машина, Техническое обслуживание (ТО), Рекламация
+        csv_folder = os.path.join(settings.BASE_DIR, 'silant/management/commands/csv')
+
+        read_csv_file(
+            os.path.join(csv_folder, 'Machine.csv'), self, 'Машина')
+        read_csv_file(
+            os.path.join(csv_folder, 'Maintenance.csv'), self, 'Техническое обслуживание')
+        read_csv_file(
+            os.path.join(csv_folder, 'Claims.csv'), self, 'Рекламация')
