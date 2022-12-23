@@ -19,7 +19,7 @@ class User(AbstractUser):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} - {self.get_role_display()}'
 
 
 class Machine(models.Model):
@@ -69,7 +69,7 @@ class Machine(models.Model):
         ordering = ('shipment_date',)
 
     def __str__(self):
-        return self.vehicle_model.name
+        return f'{self.serial_number} - {self.vehicle_model.name}'
 
 
 class Maintenance(models.Model):
@@ -95,7 +95,7 @@ class Maintenance(models.Model):
         ordering = ('maintenance_date',)
 
     def __str__(self):
-        return f'{self.machine.vehicle_model} - {self.maintenance_type}'
+        return f'{self.machine.serial_number} - {self.maintenance_type}'
 
 
 class Claim(models.Model):
@@ -125,7 +125,7 @@ class Claim(models.Model):
         ordering = ('failure_date',)
 
     def __str__(self):
-        return f'{self.machine.vehicle_model} - {self.failure_node}'
+        return f'{self.machine.serial_number} - {self.failure_node}'
 
 
 # Справочники

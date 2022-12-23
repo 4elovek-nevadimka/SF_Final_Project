@@ -9,5 +9,8 @@ from final_project import settings
 def create_user(sender, instance, created, **kwargs):
     role_group = {'CL': 'Client', 'SC': 'Service company', 'MN': 'Manager'}
     if created:
-        group = Group.objects.get(name=role_group.get(instance.role))
-        instance.groups.add(group)
+        try:
+            group = Group.objects.get(name=role_group.get(instance.role))
+            instance.groups.add(group)
+        except Group.DoesNotExist:
+            pass
