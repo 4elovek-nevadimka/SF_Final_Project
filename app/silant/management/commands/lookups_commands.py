@@ -3,7 +3,8 @@ from datetime import datetime
 
 from django.contrib.auth.models import Permission, Group
 
-from silant.models import Machine, Maintenance, MaintenanceType, User
+from silant.models import Machine, Maintenance, MaintenanceType, User, VehicleModel, EngineModel, TransmissionModel, \
+    DriveAxleModel, SteeringBridgeModel, Claim, FailureNode, RecoveryMethod
 
 
 def fill_lookup_table(dbTable, dataArray, cmd, infoName):
@@ -62,11 +63,24 @@ def read_csv_file(path, cmd, info):
 
 
 def create_machine(data):
-    pass
-    # Machine.objects.create(
-    #
-    # )
-    # print('\n'.join(row[14].split(';')))
+    Machine.objects.create(
+        vehicle_model=VehicleModel.objects.get(name=data[0]),
+        serial_number=data[1],
+        engine_model=EngineModel.objects.get(name=data[2]),
+        engine_serial_number=data[3],
+        transmission_model=TransmissionModel.objects.get(name=data[4]),
+        transmission_serial_number=data[5],
+        drive_axle_model=DriveAxleModel.objects.get(name=data[6]),
+        drive_axle_serial_number=data[7],
+        steering_bridge_model=SteeringBridgeModel.objects.get(name=data[8]),
+        steering_bridge_serial_number=data[9],
+        shipment_date=datetime.strptime(data[10], '%d.%m.%Y').date(),
+        client=User.objects.get(name=data[11]),
+        consumer=data[12],
+        delivery_address=data[13],
+        equipment='\n'.join(data[14].split(';')),
+        service_company=User.objects.get(name=data[15]),
+    )
 
 
 def create_maintenance(data):
@@ -83,4 +97,14 @@ def create_maintenance(data):
 
 
 def create_claim(data):
-    pass
+    Claim.objects.create(
+        machine=Machine.objects.get(serial_number=data[0]),
+        failure_date=datetime.strptime(data[1], '%d.%m.%Y').date(),
+        operating_time=data[2],
+        failure_node=FailureNode.objects.get(name=data[3]),
+        failure_description=data[4],
+        recovery_method=RecoveryMethod.objects.get(name=data[5]),
+        spare_parts=data[6],
+        recovery_date=datetime.strptime(data[7], '%d.%m.%Y').date(),
+        machine_downtime=data[8],
+    )
