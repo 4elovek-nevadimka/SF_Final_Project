@@ -6,9 +6,31 @@
 Главная
 {% endblock title %}
 
-
 {% block content %}
 
-NOBODY
+{% if request.user.is_authenticated %}
+{% else %}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Проверьте комплектацию и технические характеристики техники Силант</h4>
+
+        <form method="GET">
+            {% csrf_token %}
+            {{ machine_filter.form }}
+            <input type="submit" value="Поиск"/>
+        </form>
+
+        <div class="px-3 py-2">
+            <h5>Результат поиска:</h5>
+            <p class="card-text">Информация о комплектации и технических характеристиках Вашей техники</p>
+            {% if machine_filter.qs|length %}
+                {% include 'guest_card.html' %}
+            {% else %}
+                <p>Данных о машине с таким заводским номером нет в системе</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
 
 {% endblock content %}
