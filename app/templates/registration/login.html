@@ -1,0 +1,46 @@
+{% extends "registration/default_reg.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <p>Ваше имя пользователя и пароль не совпадают. Пожалуйста, попробуйте еще раз.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>У вашего аккаунта нет доступа к этой странице.
+                Чтобы продолжить, войдите в систему с учетной записью, которая имеет доступ.</p>
+        {% else %}
+            <p>Пожалуйста, войдите, чтобы увидеть эту страницу.</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table class="table table-borderless">
+            <tr>
+                <img class="d-flex align-items-center text-white"
+                     src="{% static 'images/Logotype RGB.png' %}" alt="Main Logo" width="210" height="70">
+            </tr>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        <div class="d-grid gap-2">
+            <button class="btn btn-secondary" type="submit">Войти</button>
+        </div>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+
+    <div class="my-2">
+        <a href="{% url 'index'%}" class="link-primary">На главную</a>
+    </div>
+
+{% endblock %}

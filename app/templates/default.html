@@ -31,10 +31,10 @@
                 {% if request.user.is_authenticated %}
                 <p class="nav-link">
                     Вы вошли как: {{ user.username }} Роль:{{ user.role }}
-                    <a class="btn btn-secondary btn-small" href="/accounts/logout/" role="button">Выйти</a>
+                    <a class="btn btn-secondary btn-small" href="{% url 'logout'%}" role="button">Выйти</a>
                 </p>
                 {% else %}
-                <a href="/accounts/login/">
+                <a href="{% url 'login'%}">
                     <button type="button" class="btn btn-light text-dark me-2">Авторизация</button>
                 </a>
                 {% endif %}
