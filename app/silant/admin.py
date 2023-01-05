@@ -1,11 +1,16 @@
 from django.contrib import admin
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.admin import UserAdmin
 
 from silant.models import *
 
 
 @admin.register(User)
-class User(admin.ModelAdmin):
-    fields = ('username', 'email', 'password', 'role', 'name', 'description',)
+class CustomUserAdmin(UserAdmin):
+    form = UserChangeForm
+    fieldsets = (
+        (None, {'fields': ('username', 'password', 'role', 'name', 'description',)}),
+    )
     list_display = ('username', 'role', 'name', 'description',)
     list_filter = ('role', 'name', 'description',)
     search_fields = ('name', 'description',)
