@@ -1,0 +1,54 @@
+@font-face {
+    font-family: "PT-Astra-Sans_Regular";
+    src: url({% static "fonts/PT-Astra-Sans_Regular.ttf" %});
+}
+
+@font-face {
+    font-family: "PT-Astra-Sans_Bold";
+    src: url({% static "fonts/PT-Astra-Sans_Bold.ttf" %});
+}
+
+@font-face {
+    font-family: "PT-Astra-Sans_Italic";
+    src: url({% static "fonts/PT-Astra-Sans_Italic.ttf" %});
+}
+
+@font-face {
+    font-family: "PT-Astra-Sans_Bold-Italic";
+    src: url({% static "fonts/PT-Astra-Sans_Bold-Italic.ttf" %});
+}
+
+header, nav, form {
+    font-family: PT-Astra-Sans_Bold, Helvetica, Arial, sans-serif;
+}
+
+h2 {
+    font-family: PT-Astra-Sans_Bold-Italic, Helvetica, Arial, sans-serif;
+}
+
+a, p {
+    font-family: PT-Astra-Sans_Italic, Helvetica, Arial, sans-serif;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: PT-Astra-Sans_Regular, Helvetica, Arial, sans-serif;
+}
+
+body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+@media only screen and (max-width: 700px) {
+
+    /* For mobile phones: */
+    body {
+        font-size: 24px;
+    }
+}
