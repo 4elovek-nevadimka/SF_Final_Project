@@ -2,7 +2,7 @@
 
 <div class="container my-2 d-flex flex-wrap justify-content-start">
     <img class="d-flex align-items-center"
-         src="{% static 'images/claims.png' %}" alt="ТО" width="50" height="50">
+         src="{% static 'images/claims.png' %}" alt="Рекламация" width="50" height="50">
     <div class="mx-4 my-3">
         {% if claim_filter.qs|length %}
             <a>{{ claim_filter.qs.first.machine }}</a>
@@ -40,8 +40,9 @@
             <tbody>
             {% for claim in claim_filter.qs %}
             <tr>
-                <td>{{ claim.machine.serial_number}}</td>
-                <!-- added LINK ! -->
+                <td>
+                    <a href="{% url 'machine_detail' claim.machine.id %}">{{ claim.machine.serial_number}}</a>
+                </td>
                 <td>{{ claim.failure_date }}</td>
                 <td>{{ claim.operating_time }}</td>
                 <td>{{ claim.failure_node }}</td>

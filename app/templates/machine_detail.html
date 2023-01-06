@@ -1,0 +1,81 @@
+{% extends "default.html" %}
+
+{% load static %}
+
+{% block title %}
+{{ machine }}
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="card container my-2">
+            <!-- Заголовок с картинкой -->
+            <div class="container my-2 d-flex flex-wrap justify-content-start">
+                <img class="d-flex align-items-center"
+                     src="{% static 'images/machine.png' %}" alt="Общая инфо" width="50" height="50">
+                <div class="mx-4 my-3">
+                    <a>{{ machine }}</a>
+                </div>
+            </div>
+
+            <!-- Общая инфа по машине -->
+            <div class="table-responsive">
+                <table class="table table-striped align-middle text-center">
+                    <thead>
+                    <tr>
+                        <th>Зав. № машины</th>
+                        <th>Модель техники</th>
+                        <th>Модель двигателя</th>
+                        <th>Зав. № двигателя</th>
+                        <th>Модель трансмиссии</th>
+                        <th>Зав. № трансмиссии</th>
+                        <th>Модель ведущего моста</th>
+                        <th>Зав. № ведущего моста</th>
+                        <th>Модель управляемого моста</th>
+                        <th>Зав. № управляемого моста</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ machine.serial_number }}</td>
+                        <td>{{ machine.vehicle_model.name }}</td>
+                        <td>{{ machine.engine_model.name }}</td>
+                        <td>{{ machine.engine_serial_number }}</td>
+                        <td>{{ machine.transmission_model.name }}</td>
+                        <td>{{ machine.transmission_serial_number }}</td>
+                        <td>{{ machine.drive_axle_model.name }}</td>
+                        <td>{{ machine.drive_axle_serial_number }}</td>
+                        <td>{{ machine.steering_bridge_model.name }}</td>
+                        <td>{{ machine.steering_bridge_serial_number }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Навигационная панель с кнопками -->
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="pill" href="#maintenance">ТО</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="pill" href="#claims">Рекламации</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="maintenance" class="tab-pane active">
+                        <div class="card container my-2">
+                            {% include 'machine_detail_maintenance.html' %}
+                        </div>
+                    </div>
+                    <div id="claims" class="container tab-pane fade">
+                        <div class="card container my-2">
+                            {% include 'machine_detail_claim.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

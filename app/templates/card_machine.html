@@ -44,8 +44,9 @@
             <tbody>
             {% for machine in machine_filter.qs %}
             <tr>
-                <td>{{ machine.serial_number}}</td>
-                <!-- added LINK ! -->
+                <td>
+                    <a href="{% url 'machine_detail' machine.id %}">{{ machine.serial_number}}</a>
+                </td>
                 <td>{{ machine.vehicle_model.name }}</td>
                 <td>{{ machine.engine_model.name }}</td>
                 <td>{{ machine.engine_serial_number }}</td>

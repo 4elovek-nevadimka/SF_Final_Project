@@ -1,4 +1,5 @@
-from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
 from silant.models import Machine, Maintenance, Claim
@@ -37,4 +38,16 @@ class Index(ListView):
             return context
         else:
             context['guest_filter'] = GuestFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
+
+class MachineDetail(LoginRequiredMixin, DetailView):
+    model = Machine
+    template_name = 'machine_detail.html'
+    context_object_name = 'machine'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['machine_maintenances'] = Maintenance.objects.filter(machine=self.kwargs.get('pk'))
+        context['machine_claims'] = Claim.objects.filter(machine=self.kwargs.get('pk'))
         return context

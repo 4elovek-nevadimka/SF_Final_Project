@@ -1,0 +1,44 @@
+{% load static %}
+
+<div class="container my-2 d-flex flex-wrap justify-content-between">
+    <div class="d-flex align-items-center" style="min-height: 7vh">
+        <h5 class="card-title">Информация о рекламациях Вашей техники</h5>
+    </div>
+    <img class="d-flex align-items-center"
+         src="{% static 'images/claims.png' %}" alt="Рекламация" width="50" height="50">
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped align-middle text-center">
+        <thead>
+        <tr>
+            <th>Зав. № машины</th>
+            <th>Дата отказа</th>
+            <th>Наработка, м/час</th>
+            <th>Узел отказа</th>
+            <th>Описание отказа</th>
+            <th>Способ восстановления</th>
+            <th>Используемые запасные части</th>
+            <th>Дата восстановления</th>
+            <th>Время простоя техники</th>
+            <th>Сервисная компания</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for claim in machine_claims %}
+        <tr>
+            <td>{{ claim.machine.serial_number}}</td>
+            <td>{{ claim.failure_date }}</td>
+            <td>{{ claim.operating_time }}</td>
+            <td>{{ claim.failure_node }}</td>
+            <td>{{ claim.failure_description }}</td>
+            <td>{{ claim.recovery_method }}</td>
+            <td>{{ claim.spare_parts }}</td>
+            <td>{{ claim.recovery_date }}</td>
+            <td>{{ claim.machine_downtime }}</td>
+            <td>{{ claim.machine.service_company.name }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
