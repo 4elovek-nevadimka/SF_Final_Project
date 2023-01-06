@@ -9,26 +9,44 @@
 {% block content %}
 
 {% if request.user.is_authenticated %}
-{% else %}
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Проверьте комплектацию и технические характеристики техники Силант</h4>
+<div class="container-fluid">
+    <div class="container">
+        <!-- Навигационная панель с кнопками -->
+        <ul class="nav nav-pills nav-justified" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="pill" href="#machine">Общая инфо</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#maintence">ТО</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#claims">Рекламации</a>
+            </li>
+        </ul>
+    </div>
 
-        <form method="GET">
-            {% csrf_token %}
-            {{ machine_filter.form }}
-            <input type="submit" value="Поиск"/>
-        </form>
-
-        <div class="px-3 py-2">
-            <h5>Результат поиска:</h5>
-            <p class="card-text">Информация о комплектации и технических характеристиках Вашей техники</p>
-            {% if machine_filter.qs|length %}
-                {% include 'guest_card.html' %}
-            {% else %}
-                <p>Данных о машине с таким заводским номером нет в системе</p>
-            {% endif %}
+    <div class="tab-content">
+        <div id="machine" class="tab-pane active">
+            <div class="card container my-2">
+                {% include 'card_machine.html' %}
+            </div>
         </div>
+        <div id="maintence" class="container tab-pane fade">
+            <div class="card container my-2">
+                {% include 'card_maintenance.html' %}
+            </div>
+        </div>
+        <div id="claims" class="container tab-pane fade">
+            <div class="card container my-2">
+                {% include 'card_claim.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container-fluid">
+    <div class="card container my-2">
+        {% include 'card_guest.html' %}
     </div>
 </div>
 {% endif %}

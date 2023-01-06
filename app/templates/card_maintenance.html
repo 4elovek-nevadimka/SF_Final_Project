@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
 
-</body>
-</html>
+<div class="container my-2 d-flex flex-wrap justify-content-start">
+    <img class="d-flex align-items-center"
+         src="{% static 'images/maintenance.png' %}" alt="ТО" width="50" height="50">
+    <div class="mx-4 my-3">
+        {% if maintenance_filter.qs|length %}
+            <a>{{ maintenance_filter.qs.first.machine }}</a>
+        {% else %}
+            <a>Машина не выбрана</a>
+        {% endif %}
+    </div>
+</div>
+<h5 class="card-title">Информация о проведенных ТО Вашей техники</h5>
+
+<!-- Форма с данными по ТО -->
+<form method="GET" class="my-3">
+    {% csrf_token %}
+    {{ maintenance_filter.form }}
+    <input type="submit" class="btn btn-light text-dark me-2" value="Поиск"/>
+</form>
+
+{% if maintenance_filter.qs|length %}
+    <div class="table-responsive">
+        <table class="table table-striped align-middle text-center">
+            <thead>
+            <tr>
+                <th>Зав. № машины</th>
+                <th>Вид ТО</th>
+                <th>Дата проведения ТО</th>
+                <th>Наработка, м/час</th>
+                <th>Заказ-наряд</th>
+                <th>Дата заказ-наряда</th>
+                <th>Организация, проводившая ТО</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for maintenance in maintenance_filter.qs %}
+            <tr>
+                <td>{{ maintenance.machine.serial_number}}</td>
+                <!-- added LINK ! -->
+                <td>{{ maintenance.maintenance_type }}</td>
+                <td>{{ maintenance.maintenance_date }}</td>
+                <td>{{ maintenance.operating_time }}</td>
+                <td>{{ maintenance.work_order_number }}</td>
+                <td>{{ maintenance.work_order_date }}</td>
+                <td>{{ maintenance.service_company.name }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <h6>Для указанных параметров поиска нет данных</h6>
+{% endif %}

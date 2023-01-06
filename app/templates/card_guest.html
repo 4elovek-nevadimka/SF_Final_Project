@@ -1,34 +1,56 @@
-<div class="table-responsive" style="overflow-y: hidden">
-    <table class="table table-striped align-middle text-center">
-        <thead>
-        <tr>
-            <th>Зав. № машины</th>
-            <th>Модель техники</th>
-            <th>Модель двигателя</th>
-            <th>Зав. № двигателя</th>
-            <th>Модель трансмиссии</th>
-            <th>Зав. № трансмиссии</th>
-            <th>Модель ведущего моста</th>
-            <th>Зав. № ведущего моста</th>
-            <th>Модель управляемого моста</th>
-            <th>Зав. № управляемого моста</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for machine in guest_filter.qs %}
-        <tr>
-            <td>{{ machine.serial_number}}</td>
-            <td>{{ machine.vehicle_model.name}}</td>
-            <td>{{ machine.engine_model.name}}</td>
-            <td>{{ machine.engine_serial_number}}</td>
-            <td>{{ machine.transmission_model.name}}</td>
-            <td>{{ machine.transmission_serial_number}}</td>
-            <td>{{ machine.drive_axle_model.name}}</td>
-            <td>{{ machine.drive_axle_serial_number}}</td>
-            <td>{{ machine.steering_bridge_model.name}}</td>
-            <td>{{ machine.steering_bridge_serial_number }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% load static %}
+
+<div class="container my-2 d-flex flex-wrap justify-content-start">
+    <img class="d-flex align-items-center"
+         src="{% static 'images/guest.png' %}" alt="Общая инфо" width="50" height="50">
+    <div class="mx-4 my-3">
+        <a>Проверьте комплектацию и технические характеристики техники Силант</a>
+    </div>
 </div>
+<h5 class="container">Информация о комплектации и технических характеристиках Вашей техники</h5>
+
+<!-- Форма с данными по машинам -->
+<form method="GET" class="my-3">
+    {% csrf_token %}
+    {{ guest_filter.form }}
+    <input type="submit" class="btn btn-light text-dark me-2" value="Поиск"/>
+</form>
+
+{% if guest_filter.qs|length %}
+    <div class="table-responsive">
+        <table class="table table-striped align-middle text-center">
+            <thead>
+            <tr>
+                <th>Зав. № машины</th>
+                <th>Модель техники</th>
+                <th>Модель двигателя</th>
+                <th>Зав. № двигателя</th>
+                <th>Модель трансмиссии</th>
+                <th>Зав. № трансмиссии</th>
+                <th>Модель ведущего моста</th>
+                <th>Зав. № ведущего моста</th>
+                <th>Модель управляемого моста</th>
+                <th>Зав. № управляемого моста</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for machine in guest_filter.qs %}
+            <tr>
+                <td>{{ machine.serial_number }}</td>
+                <td>{{ machine.vehicle_model.name }}</td>
+                <td>{{ machine.engine_model.name }}</td>
+                <td>{{ machine.engine_serial_number }}</td>
+                <td>{{ machine.transmission_model.name }}</td>
+                <td>{{ machine.transmission_serial_number }}</td>
+                <td>{{ machine.drive_axle_model.name }}</td>
+                <td>{{ machine.drive_axle_serial_number }}</td>
+                <td>{{ machine.steering_bridge_model.name }}</td>
+                <td>{{ machine.steering_bridge_serial_number }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p>Данных о машине с таким заводским номером нет в системе</p>
+{% endif %}
