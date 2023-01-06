@@ -8,7 +8,6 @@
 
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
-<!--    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>-->
     <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,30 +17,55 @@
 <!-- Header -->
 <header>
     <div class="px-3 py-2 text-bg-secondary">
-        <div class="container d-flex flex-wrap justify-content-between">
-
+        <!-- Контейнер в шапку -->
+        <div class="container d-flex flex-wrap justify-content-between align-items-center">
+            <!-- Лого -->
             <img class="d-flex align-items-center text-white"
                  src="{% static 'images/logotype_RGB.png' %}" alt="Main Logo" width="210" height="70">
-
-            <div class="my-3">
-                <p class="nav-link text-white">+7-8352-20-12-09, telegram</p>
-            </div>
-
-            <div class="my-3">
-                {% if request.user.is_authenticated %}
-                <p class="nav-link">
-                    Вы вошли как: {{ user.username }} Роль:{{ user.role }}
-                    <a class="btn btn-secondary btn-small" href="{% url 'logout'%}" role="button">Выйти</a>
-                </p>
-                {% else %}
-                <a href="{% url 'login'%}">
-                    <button type="button" class="btn btn-light text-dark me-2">Авторизация</button>
+            <!-- Контакты -->
+            <div>
+                <a class="text-white" href="tel:+78352201209">
+                    <span>+7 (8352) 20-12-09</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-telegram" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+                    </svg>
                 </a>
-                {% endif %}
+            </div>
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                <!-- Данные о пользователе, если залогинен -->
+                <div class="flex-column">
+                    {% if request.user.is_authenticated %}
+                    <div>
+                        <span>
+                            Вы вошли как: {{ user.name }}
+                        </span>
+                    </div>
+                    <div>
+                        <span>
+                            {% if user.role == 'CL' %}
+                            Роль: Клиент
+                            {% elif user.role == 'SC' %}
+                            Роль: Сервисная компания
+                            {% elif user.role == 'MN' %}
+                            Роль: Менеджер
+                            {% endif %}
+                        </span>
+                    </div>
+                    {% endif %}
+                </div>
+                <!-- Войти / выйти -->
+                <div>
+                    {% if request.user.is_authenticated %}
+                        <a class="btn btn-secondary btn-small" href="{% url 'logout'%}">Выйти</a>
+                    {% else %}
+                        <a class="btn btn-light text-dark me-2" href="{% url 'login'%}">Авторизация</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-    <div class="px-3 py-2 border-bottom mb-3">
+    <div class="px-3 py-2 mb-3">
         <div class="container d-flex flex-wrap justify-content-start">
             <h2>Электронная сервисная книжка "Мой силант"</h2>
         </div>
@@ -55,19 +79,16 @@
 
 <!-- Footer -->
 <footer>
-    <!--    <div class="px-3 py-2">-->
     <div class="px-3 py-2 text-bg-secondary">
-        <div class="container">
-            <ul class="nav justify-content-around">
-                <li class="nav-item">
-                    <!--            <p class="text-center text-muted">+7-8352-20-12-09, telegram</p>-->
-                    <p class="text-center text-white">+7-8352-20-12-09, telegram</p>
-                </li>
-                <li class="nav-item">
-                    <!--            <p class="text-center text-muted">Мой Силант 2022</p>-->
-                    <p class="text-center text-white">Мой Силант 2022</p>
-                </li>
-            </ul>
+        <div class="container d-flex flex-wrap justify-content-around align-items-center">
+            <a class="text-white" href="tel:+78352201209">
+                <span>+7 (8352) 20-12-09 </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-telegram" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+                </svg>
+            </a>
+            <span class="text-center text-white">Мой Силант 2022</span>
         </div>
     </div>
 </footer>
