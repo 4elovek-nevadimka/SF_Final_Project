@@ -44,11 +44,3 @@ body {
 body::-webkit-scrollbar {
     display: none;
 }
-
-@media only screen and (max-width: 700px) {
-
-    /* For mobile phones: */
-    body {
-        font-size: 24px;
-    }
-}
