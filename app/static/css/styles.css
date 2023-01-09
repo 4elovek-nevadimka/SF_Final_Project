@@ -1,3 +1,9 @@
+:root {
+    --main-theme-blue-color: #163E6C;
+    --main-theme-red-color: #D20A11;
+    --main-theme-white-color: #EBE6D6;
+}
+
 @font-face {
     font-family: "PT-Astra-Sans_Regular";
     src: url({% static "fonts/PT-Astra-Sans_Regular.ttf" %});
@@ -43,4 +49,25 @@ body {
 
 body::-webkit-scrollbar {
     display: none;
+}
+
+.brand-bg-body {
+	background-color: var(--main-theme-white-color);
+}
+
+.brand-bg-header {
+	background-color: var(--main-theme-blue-color);
+}
+
+.brand-text-title {
+	color: var(--main-theme-red-color);
+}
+
+.brand-btn {
+    background-color: var(--main-theme-blue-color)!important;
+}
+
+.brand-btn:hover {
+    background-color: var(--main-theme-white-color)!important;
+    color: var(--main-theme-blue-color)!important;
 }

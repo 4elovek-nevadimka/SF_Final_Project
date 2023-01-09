@@ -2,10 +2,14 @@
 
 {% load static %}
 
+{% block title %}
+Выход
+{% endblock title %}
+
 {% block content %}
 
     <img class="d-flex align-items-center text-black"
-         src="{% static 'images/logotype_RGB.png' %}" alt="Main Logo" width="210" height="70">
+         src="{% static 'images/logotype_text.png' %}" alt="Main Logo" width="210" height="70">
     <h2 class="border-bottom">Вы вышли из системы!</h2>
 
     <div class="container d-flex flex-wrap justify-content-between my-2">

@@ -16,12 +16,12 @@
 </head>
 <!-- Header -->
 <header>
-    <div class="px-3 py-2 text-bg-secondary">
+    <div class="px-3 py-3 brand-bg-header">
         <!-- Контейнер в шапку -->
         <div class="container d-flex flex-wrap justify-content-between align-items-center">
             <!-- Лого -->
             <img class="d-flex align-items-center text-white"
-                 src="{% static 'images/logotype_RGB.png' %}" alt="Main Logo" width="210" height="70">
+                 src="{% static 'images/logotype_symbol.png' %}" alt="Main Logo" width="160" height="70">
             <!-- Контакты -->
             <div>
                 <a class="text-white" href="tel:+78352201209">
@@ -34,7 +34,7 @@
             </div>
             <div class="d-flex flex-wrap justify-content-between align-items-center">
                 <!-- Данные о пользователе, если залогинен -->
-                <div class="flex-column">
+                <div class="flex-column text-white mx-2">
                     {% if request.user.is_authenticated %}
                     <div>
                         <span>
@@ -57,29 +57,29 @@
                 <!-- Войти / выйти -->
                 <div>
                     {% if request.user.is_authenticated %}
-                        <a class="btn btn-secondary btn-small" href="{% url 'logout'%}">Выйти</a>
+                        <a class="btn btn-light" href="{% url 'logout'%}">Выйти</a>
                     {% else %}
-                        <a class="btn btn-light text-dark me-2" href="{% url 'login'%}">Авторизация</a>
+                        <a class="btn btn-light" href="{% url 'login'%}">Авторизация</a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
-    <div class="px-3 py-2 mb-3">
+    <div class="px-3 py-2 mb-3 brand-bg-header">
         <div class="container d-flex flex-wrap justify-content-start">
-            <h2>Электронная сервисная книжка "Мой силант"</h2>
+            <h2 class="brand-text-title">Электронная сервисная книжка "Мой силант"</h2>
         </div>
     </div>
 </header>
 
 <!-- Body -->
-<body>
+<body class="brand-bg-body">
 {% block content %}{% endblock content %}
 </body>
 
 <!-- Footer -->
 <footer>
-    <div class="px-3 py-2 text-bg-secondary">
+    <div class="px-3 py-2 brand-bg-header">
         <div class="container d-flex flex-wrap justify-content-around align-items-center">
             <a class="text-white" href="tel:+78352201209">
                 <span>+7 (8352) 20-12-09 </span>
