@@ -1,14 +1,19 @@
 {% load static %}
 
-<div class="container my-2 d-flex flex-wrap justify-content-start">
-    <img class="d-flex align-items-center"
-         src="{% static 'images/maintenance.png' %}" alt="ТО" width="50" height="50">
-    <div class="mx-4 my-3">
-        {% if maintenance_filter.qs|length %}
+<div class="container my-2 d-flex flex-wrap justify-content-between align-items-center">
+    <div class="d-flex justify-content-start">
+        <img class="d-flex align-items-center"
+             src="{% static 'images/maintenance.png' %}" alt="ТО" width="50" height="50">
+        <div class="mx-4 my-3">
+            {% if maintenance_filter.qs|length %}
             <a>{{ maintenance_filter.qs.first.machine }}</a>
-        {% else %}
+            {% else %}
             <a>Машина не выбрана</a>
-        {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <a class="btn brand-btn text-white" href="{% url 'maintenance_create' %}" role="button">Добавить ТО</a>
     </div>
 </div>
 <h5 class="card-title">Информация о проведенных ТО Вашей техники</h5>
