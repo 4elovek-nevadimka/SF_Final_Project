@@ -273,8 +273,19 @@ managers = [
 # Разрешения для групп: клиент, сервисная компания, менеджер
 
 
-client_permission_list = ()
+client_permission_list = (
+    'view_machine', 'view_maintenance', 'view_claim',
+    'add_maintenance',
+)
 
-service_company_permission_list = ()
+service_company_permission_list = (
+    'view_machine', 'view_maintenance', 'view_claim',
+    'add_maintenance', 'add_claim',
+)
 
-manager_permission_list = ()
+manager_permission_list = (
+    'view_machine', 'view_maintenance', 'view_claim',
+    'add_machine', 'add_maintenance', 'add_claim',
+    # права на создание / редактирование справочников
+
+)
