@@ -19,7 +19,7 @@ class User(AbstractUser):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return f'{self.name} - {self.get_role_display()}'
+        return f'{self.name}'
 
 
 class Machine(models.Model):

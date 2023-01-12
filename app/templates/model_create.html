@@ -1,0 +1,24 @@
+{% extends "default.html" %}
+
+{% block content %}
+
+<div class="container my-2">
+    <form method="POST" class="form-group">
+        {% csrf_token %}
+        <div class="card my-2 py-2">
+            <div align="center" style="margin: auto;">
+                {% for field in form %}
+                <p>
+                    {{ field.label_tag }}
+                </p>
+                <p>
+                    {{ field }}
+                </p>
+                {% endfor %}
+                <input class="btn my-2 brand-btn text-white" type="submit" value="Сохранить">
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
