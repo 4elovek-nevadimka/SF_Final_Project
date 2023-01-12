@@ -28,17 +28,17 @@
     <div class="tab-content">
         <div id="machine" class="tab-pane active">
             <div class="card container my-2">
-                {% include 'card_machine.html' %}
+                {% include 'cards/card_machine.html' %}
             </div>
         </div>
         <div id="maintenance" class="container tab-pane fade">
             <div class="card container my-2">
-                {% include 'card_maintenance.html' %}
+                {% include 'cards/card_maintenance.html' %}
             </div>
         </div>
         <div id="claims" class="container tab-pane fade">
             <div class="card container my-2">
-                {% include 'card_claim.html' %}
+                {% include 'cards/card_claim.html' %}
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
 {% else %}
 <div class="container-fluid">
     <div class="card container my-2">
-        {% include 'card_guest.html' %}
+        {% include 'cards/card_guest.html' %}
     </div>
 </div>
 {% endif %}
