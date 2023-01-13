@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
-from silant.forms import MaintenanceForm
+from silant.forms import MaintenanceForm, ClaimForm
 from silant.models import Machine, Maintenance, Claim
 
 
@@ -59,6 +59,15 @@ class MaintenanceCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateV
     permission_required = ('silant.add_maintenance',)
     template_name = 'model_create.html'
     form_class = MaintenanceForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('index')
+
+
+class ClaimCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('silant.add_claim',)
+    template_name = 'model_create.html'
+    form_class = ClaimForm
 
     def get_success_url(self, **kwargs):
         return reverse('index')

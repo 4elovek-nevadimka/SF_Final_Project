@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.forms import ModelForm, DateInput
 
-from silant.models import Maintenance
+from silant.models import Maintenance, Claim
 
 
 class MaintenanceForm(ModelForm):
@@ -25,3 +25,22 @@ class MaintenanceForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(MaintenanceForm, self).__init__(*args, **kwargs)
         self.fields['service_company'].queryset = get_user_model().objects.filter(role='SC')
+
+
+class ClaimForm(ModelForm):
+    class Meta:
+        model = Claim
+        fields = '__all__'
+
+        widgets = {
+            'failure_date': DateInput(
+                format='%d/%m/%Y',
+                attrs={'class': 'form-control',
+                       'placeholder': 'Select a date',
+                       'type': 'date'}),
+            'recovery_date': DateInput(
+                format='%d/%m/%Y',
+                attrs={'class': 'form-control',
+                       'placeholder': 'Select a date',
+                       'type': 'date'})
+        }
