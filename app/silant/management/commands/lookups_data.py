@@ -288,15 +288,15 @@ manager_permission_list = (
     'add_machine', 'add_maintenance', 'add_claim',
 
     # права на создание / редактирование справочников
-    'view_vehicle_model', 'add_vehicle_model', 'change_vehicle_model', 'delete_vehicle_model',
-    'view_engine_model', 'add_engine_model', 'change_engine_model', 'delete_engine_model',
-    'view_transmission_model', 'add_transmission_model', 'change_transmission_model', 'delete_transmission_model',
-    'view_drive_axle_model', 'add_drive_axle_model', 'change_drive_axle_model', 'delete_drive_axle_model',
-    'view_steering_bridge_model', 'add_steering_bridge_model', 'change_steering_bridge_model',
-    'delete_steering_bridge_model',
+    'view_vehiclemodel', 'add_vehiclemodel', 'change_vehiclemodel', 'delete_vehiclemodel',
+    'view_enginemodel', 'add_enginemodel', 'change_enginemodel', 'delete_enginemodel',
+    'view_transmissionmodel', 'add_transmissionmodel', 'change_transmissionmodel', 'delete_transmissionmodel',
+    'view_driveaxlemodel', 'add_driveaxlemodel', 'change_driveaxlemodel', 'delete_driveaxlemodel',
+    'view_steeringbridgemodel', 'add_steeringbridgemodel', 'change_steeringbridgemodel',
+    'delete_steeringbridgemodel',
 
-    'view_maintenance_type', 'add_maintenance_type', 'change_maintenance_type', 'delete_maintenance_type',
+    'view_maintenancetype', 'add_maintenancetype', 'change_maintenancetype', 'delete_maintenancetype',
 
-    'view_failure_node', 'add_failure_node', 'change_failure_node', 'delete_failure_node',
-    'view_recovery_method', 'add_recovery_method', 'change_recovery_method', 'delete_recovery_method',
+    'view_failurenode', 'add_failurenode', 'change_failurenode', 'delete_failurenode',
+    'view_recoverymethod', 'add_recoverymethod', 'change_recoverymethod', 'delete_recoverymethod',
 )

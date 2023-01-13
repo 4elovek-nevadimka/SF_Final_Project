@@ -18,22 +18,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write('Инициализация базы данных тестовым набором данных...')
 
-        # Группы и разрешения
-        create_group(
-            'Client', client_permission_list, self)
-        create_group(
-            'Service company', service_company_permission_list, self)
-        create_group(
-            'Manager', manager_permission_list, self)
-
-        # Справочники пользователей
-        fill_user_lookup_table(
-            User, clients, self, 'Пользователи: клиенты')
-        fill_user_lookup_table(
-            User, service_companies, self, 'Пользователи: сервисные компании')
-        fill_user_lookup_table(
-            User, managers, self, 'Пользователи: менеджеры')
-
         # Справочники для сущности 'Машина'
         fill_lookup_table(
             VehicleModel, vehicle_models, self, 'Модель техники')
@@ -55,6 +39,22 @@ class Command(BaseCommand):
             FailureNode, failure_nodes, self, 'Узел отказа')
         fill_lookup_table(
             RecoveryMethod, recovery_methods, self, 'Способ восстановления')
+
+        # Группы и разрешения
+        create_group(
+            'Client', client_permission_list, self)
+        create_group(
+            'Service company', service_company_permission_list, self)
+        create_group(
+            'Manager', manager_permission_list, self)
+
+        # Справочники пользователей
+        fill_user_lookup_table(
+            User, clients, self, 'Пользователи: клиенты')
+        fill_user_lookup_table(
+            User, service_companies, self, 'Пользователи: сервисные компании')
+        fill_user_lookup_table(
+            User, managers, self, 'Пользователи: менеджеры')
 
         # Экспорт тестовых данных по сущностям Машина, Техническое обслуживание (ТО), Рекламация
         csv_folder = os.path.join(settings.BASE_DIR, 'silant/management/commands/csv')
