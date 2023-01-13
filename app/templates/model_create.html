@@ -1,11 +1,17 @@
 {% extends "default.html" %}
 
+{% load static %}
+
 {% block content %}
 
 <div class="container my-2">
     <form method="POST" class="form-group">
         {% csrf_token %}
         <div class="card my-2 py-2">
+            <a href="javascript:history.back()">
+                <img class="zoom-btn mx-1 my-1"
+                     src="{% static 'images/go_back.png' %}" alt="Go back" width="60" height="25">
+            </a>
             <div align="center" style="margin: auto;">
                 {% for field in form %}
                 <p>

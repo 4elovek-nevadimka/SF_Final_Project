@@ -81,3 +81,11 @@ body::-webkit-scrollbar {
 .nav-link {
     color: var(--main-theme-blue-color)!important;
 }
+
+.zoom-btn {
+    border-radius: 20%;
+}
+
+.zoom-btn:hover {
+    transform: scale(1.1);
+}

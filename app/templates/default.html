@@ -68,8 +68,12 @@
         </div>
     </div>
     <div class="px-3 py-2 mb-3 brand-bg-header">
-        <div class="container d-flex flex-wrap justify-content-start">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center">
             <h2 class="brand-text-title">Электронная сервисная книжка "Мой силант"</h2>
+            {% if user.role == 'MN' %}
+                <img class="zoom-btn mx-1 my-1"
+                     src="{% static 'images/lookups.png' %}" alt="Lookups" width="46" height="46">
+            {% endif %}
         </div>
     </div>
 </header>
