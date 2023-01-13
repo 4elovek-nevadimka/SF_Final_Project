@@ -286,6 +286,17 @@ service_company_permission_list = (
 manager_permission_list = (
     'view_machine', 'view_maintenance', 'view_claim',
     'add_machine', 'add_maintenance', 'add_claim',
-    # права на создание / редактирование справочников
 
+    # права на создание / редактирование справочников
+    'view_vehicle_model', 'add_vehicle_model', 'change_vehicle_model', 'delete_vehicle_model',
+    'view_engine_model', 'add_engine_model', 'change_engine_model', 'delete_engine_model',
+    'view_transmission_model', 'add_transmission_model', 'change_transmission_model', 'delete_transmission_model',
+    'view_drive_axle_model', 'add_drive_axle_model', 'change_drive_axle_model', 'delete_drive_axle_model',
+    'view_steering_bridge_model', 'add_steering_bridge_model', 'change_steering_bridge_model',
+    'delete_steering_bridge_model',
+
+    'view_maintenance_type', 'add_maintenance_type', 'change_maintenance_type', 'delete_maintenance_type',
+
+    'view_failure_node', 'add_failure_node', 'change_failure_node', 'delete_failure_node',
+    'view_recovery_method', 'add_recovery_method', 'change_recovery_method', 'delete_recovery_method',
 )

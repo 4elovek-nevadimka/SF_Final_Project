@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
 from silant.forms import MaintenanceForm, ClaimForm, MachineForm
@@ -56,6 +56,7 @@ class MachineDetail(LoginRequiredMixin, DetailView):
         return context
 
 
+# CreateView для основных моделей
 class MachineCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     permission_required = ('silant.add_machine',)
     template_name = 'model_create.html'
@@ -85,3 +86,12 @@ class ClaimCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
 
     def get_success_url(self, **kwargs):
         return reverse('index')
+
+
+# List / Create / Update / Delete Views для справочников
+class LookupsListView(PermissionRequiredMixin, LoginRequiredMixin, TemplateView):
+    permission_required = ('silant.view_vehicle_model', 'silant.view_engine_model', 'silant.view_transmission_model',
+                           'silant.view_drive_axle_model', 'silant.view_steering_bridge_model',
+                           'silant.view_maintenance_type',
+                           'silant.view_failure_node', 'silant.view_recovery_method')
+    template_name = 'lookups/lookups_list.html'
