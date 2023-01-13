@@ -1,10 +1,17 @@
 {% load static %}
 
-<div class="container my-2 d-flex flex-wrap justify-content-start">
-    <img class="d-flex align-items-center"
-         src="{% static 'images/machine.png' %}" alt="Общая инфо" width="50" height="50">
-    <div class="mx-4 my-3">
-        <a>{{ user.name }} - {{ user.description }}</a>
+<div class="container my-2 d-flex flex-wrap justify-content-between align-items-center">
+    <div class="d-flex justify-content-start">
+        <img class="d-flex align-items-center"
+             src="{% static 'images/machine.png' %}" alt="Общая инфо" width="50" height="50">
+        <div class="mx-4 my-3">
+            <a>{{ user.name }} - {{ user.description }}</a>
+        </div>
+    </div>
+    <div>
+        {% if user.role == 'MN' %}
+            <a class="btn brand-btn text-white" href="{% url 'machine_create' %}" role="button">Добавить Машину</a>
+        {% endif %}
     </div>
 </div>
 <h5 class="container">Информация о комплектации и технических характеристиках Вашей техники</h5>

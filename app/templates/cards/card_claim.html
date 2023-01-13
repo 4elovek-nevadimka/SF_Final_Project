@@ -13,7 +13,9 @@
         </div>
     </div>
     <div>
-        <a class="btn brand-btn text-white" href="{% url 'claim_create' %}" role="button">Добавить Рекламацию</a>
+        {% if user.role == 'MN' or user.role == 'SC'  %}
+            <a class="btn brand-btn text-white" href="{% url 'claim_create' %}" role="button">Добавить Рекламацию</a>
+        {% endif %}
     </div>
 </div>
 <h5 class="card-title">Информация о рекламациях Вашей техники</h5>

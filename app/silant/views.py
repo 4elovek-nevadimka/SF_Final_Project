@@ -1,9 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
-from silant.forms import MaintenanceForm, ClaimForm
+from silant.forms import MaintenanceForm, ClaimForm, MachineForm
 from silant.models import Machine, Maintenance, Claim
 
 
@@ -53,6 +54,19 @@ class MachineDetail(LoginRequiredMixin, DetailView):
         context['machine_maintenances'] = Maintenance.objects.filter(machine=self.kwargs.get('pk'))
         context['machine_claims'] = Claim.objects.filter(machine=self.kwargs.get('pk'))
         return context
+
+
+class MachineCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('silant.add_machine',)
+    template_name = 'model_create.html'
+    form_class = MachineForm
+
+    def form_valid(self, form):
+        form.instance.client = get_user_model().objects.get(id=self.request.user.id)
+        return super(MachineCreateView, self).form_valid(form)
+
+    def get_success_url(self, **kwargs):
+        return reverse('index')
 
 
 class MaintenanceCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):

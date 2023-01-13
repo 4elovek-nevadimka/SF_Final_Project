@@ -1,7 +1,25 @@
 from django.contrib.auth import get_user_model
 from django.forms import ModelForm, DateInput
 
-from silant.models import Maintenance, Claim
+from silant.models import Maintenance, Claim, Machine
+
+
+class MachineForm(ModelForm):
+    class Meta:
+        model = Machine
+        fields = '__all__'
+        exclude = ('client',)
+        widgets = {
+            'shipment_date': DateInput(
+                format='%d/%m/%Y',
+                attrs={'class': 'form-control',
+                       'placeholder': 'Select a date',
+                       'type': 'date'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(MachineForm, self).__init__(*args, **kwargs)
+        self.fields['service_company'].queryset = get_user_model().objects.filter(role='SC')
 
 
 class MaintenanceForm(ModelForm):
