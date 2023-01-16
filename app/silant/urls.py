@@ -9,7 +9,8 @@ from silant.views import Index, MachineDetail, MaintenanceCreateView, ClaimCreat
     LookupSteeringBridgeModelListView, LookupSteeringBridgeModelCreateView, LookupSteeringBridgeModelUpdateView, \
     LookupSteeringBridgeModelDeleteView, LookupMaintenanceTypeListView, LookupMaintenanceTypeCreateView, \
     LookupMaintenanceTypeUpdateView, LookupMaintenanceTypeDeleteView, LookupFailureNodeListView, \
-    LookupFailureNodeCreateView, LookupFailureNodeUpdateView, LookupFailureNodeDeleteView
+    LookupFailureNodeCreateView, LookupFailureNodeUpdateView, LookupFailureNodeDeleteView, LookupRecoveryMethodListView, \
+    LookupRecoveryMethodCreateView, LookupRecoveryMethodUpdateView, LookupRecoveryMethodDeleteView
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
@@ -74,4 +75,12 @@ urlpatterns = [
          LookupFailureNodeUpdateView.as_view(), name='lookup_failure_node_update'),
     path('lookup_failure_node_delete/<int:pk>/',
          LookupFailureNodeDeleteView.as_view(), name='lookup_failure_node_delete'),
+
+    path('lookup_recovery_method/', LookupRecoveryMethodListView.as_view(), name='lookup_recovery_method'),
+    path('lookup_recovery_method_create',
+         LookupRecoveryMethodCreateView.as_view(), name='lookup_recovery_method_create'),
+    path('lookup_recovery_method_update/<int:pk>/',
+         LookupRecoveryMethodUpdateView.as_view(), name='lookup_recovery_method_update'),
+    path('lookup_recovery_method_delete/<int:pk>/',
+         LookupRecoveryMethodDeleteView.as_view(), name='lookup_recovery_method_delete'),
 ]

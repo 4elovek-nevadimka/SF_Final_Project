@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.forms import ModelForm, DateInput
 
 from silant.models import Maintenance, Claim, Machine, VehicleModel, EngineModel, TransmissionModel, DriveAxleModel, \
-    SteeringBridgeModel, MaintenanceType, FailureNode
+    SteeringBridgeModel, MaintenanceType, FailureNode, RecoveryMethod
 
 
 class MachineForm(ModelForm):
@@ -104,4 +104,10 @@ class MaintenanceTypeForm(ModelForm):
 class FailureNodeForm(ModelForm):
     class Meta:
         model = FailureNode
+        fields = '__all__'
+
+
+class RecoveryMethodForm(ModelForm):
+    class Meta:
+        model = RecoveryMethod
         fields = '__all__'

@@ -5,9 +5,10 @@ from django.views.generic import ListView, DetailView, CreateView, TemplateView,
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
 from silant.forms import MaintenanceForm, ClaimForm, MachineForm, VehicleModelForm, EngineModelForm, \
-    TransmissionModelForm, DriveAxleModelForm, SteeringBridgeModelForm, MaintenanceTypeForm, FailureNodeForm
+    TransmissionModelForm, DriveAxleModelForm, SteeringBridgeModelForm, MaintenanceTypeForm, FailureNodeForm, \
+    RecoveryMethodForm
 from silant.models import Machine, Maintenance, Claim, VehicleModel, EngineModel, TransmissionModel, DriveAxleModel, \
-    SteeringBridgeModel, MaintenanceType, FailureNode
+    SteeringBridgeModel, MaintenanceType, FailureNode, RecoveryMethod
 
 
 class Index(ListView):
@@ -406,3 +407,47 @@ class LookupFailureNodeDeleteView(PermissionRequiredMixin, LoginRequiredMixin, D
 
     def get_success_url(self, **kwargs):
         return reverse('lookup_failure_node')
+
+
+class LookupRecoveryMethodListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('silant.view_recoverymethod',)
+    model = RecoveryMethod
+    template_name = 'lookups/lookup_list.html'
+    context_object_name = 'lookup_table_values'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lookup_table_name'] = 'Способы восстановления'
+        context['href_create'] = 'lookup_recovery_method_create'
+        context['href_update'] = 'lookup_recovery_method_update'
+        context['href_delete'] = 'lookup_recovery_method_delete'
+        return context
+
+
+class LookupRecoveryMethodCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('silant.add_recoverymethod',)
+    template_name = 'lookups/lookup_create.html'
+    form_class = RecoveryMethodForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_recovery_method')
+
+
+class LookupRecoveryMethodUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('silant.change_recoverymethod',)
+    model = RecoveryMethod
+    template_name = 'lookups/lookup_update.html'
+    form_class = RecoveryMethodForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_recovery_method')
+
+
+class LookupRecoveryMethodDeleteView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    permission_required = ('silant.delete_recoverymethod',)
+    model = RecoveryMethod
+    template_name = 'lookups/lookup_delete.html'
+    context_object_name = 'lookup_model'
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_recovery_method')
