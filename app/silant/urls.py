@@ -9,8 +9,9 @@ from silant.views import Index, MachineDetail, MaintenanceCreateView, ClaimCreat
     LookupSteeringBridgeModelListView, LookupSteeringBridgeModelCreateView, LookupSteeringBridgeModelUpdateView, \
     LookupSteeringBridgeModelDeleteView, LookupMaintenanceTypeListView, LookupMaintenanceTypeCreateView, \
     LookupMaintenanceTypeUpdateView, LookupMaintenanceTypeDeleteView, LookupFailureNodeListView, \
-    LookupFailureNodeCreateView, LookupFailureNodeUpdateView, LookupFailureNodeDeleteView, LookupRecoveryMethodListView, \
-    LookupRecoveryMethodCreateView, LookupRecoveryMethodUpdateView, LookupRecoveryMethodDeleteView
+    LookupFailureNodeCreateView, LookupFailureNodeUpdateView, LookupFailureNodeDeleteView, \
+    LookupRecoveryMethodListView, LookupRecoveryMethodCreateView, LookupRecoveryMethodUpdateView, \
+    LookupRecoveryMethodDeleteView
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
