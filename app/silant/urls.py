@@ -3,7 +3,8 @@ from django.urls import path
 from silant.views import Index, MachineDetail, MaintenanceCreateView, ClaimCreateView, MachineCreateView, \
     LookupsListView, LookupVehicleModelListView, LookupVehicleModelUpdateView, LookupVehicleModelCreateView, \
     LookupVehicleModelDeleteView, LookupEngineModelListView, LookupEngineModelCreateView, LookupEngineModelUpdateView, \
-    LookupEngineModelDeleteView
+    LookupEngineModelDeleteView, LookupTransmissionModelCreateView, LookupTransmissionModelListView, \
+    LookupTransmissionModelUpdateView, LookupTransmissionModelDeleteView
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
@@ -28,5 +29,13 @@ urlpatterns = [
          LookupEngineModelUpdateView.as_view(), name='lookup_engine_model_update'),
     path('lookup_engine_model_delete/<int:pk>/',
          LookupEngineModelDeleteView.as_view(), name='lookup_engine_model_delete'),
+
+    path('lookup_transmission_model/', LookupTransmissionModelListView.as_view(), name='lookup_transmission_model'),
+    path('lookup_transmission_model_create',
+         LookupTransmissionModelCreateView.as_view(), name='lookup_transmission_model_create'),
+    path('lookup_transmission_model_update/<int:pk>/',
+         LookupTransmissionModelUpdateView.as_view(), name='lookup_transmission_model_update'),
+    path('lookup_transmission_model_delete/<int:pk>/',
+         LookupTransmissionModelDeleteView.as_view(), name='lookup_transmission_model_delete'),
 
 ]

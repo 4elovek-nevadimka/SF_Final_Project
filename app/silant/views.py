@@ -4,8 +4,9 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
-from silant.forms import MaintenanceForm, ClaimForm, MachineForm, VehicleModelForm, EngineModelForm
-from silant.models import Machine, Maintenance, Claim, VehicleModel, EngineModel
+from silant.forms import MaintenanceForm, ClaimForm, MachineForm, VehicleModelForm, EngineModelForm, \
+    TransmissionModelForm
+from silant.models import Machine, Maintenance, Claim, VehicleModel, EngineModel, TransmissionModel
 
 
 class Index(ListView):
@@ -184,3 +185,47 @@ class LookupEngineModelDeleteView(PermissionRequiredMixin, LoginRequiredMixin, D
 
     def get_success_url(self, **kwargs):
         return reverse('lookup_engine_model')
+
+
+class LookupTransmissionModelListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('silant.view_transmissionmodel',)
+    model = TransmissionModel
+    template_name = 'lookups/lookup_list.html'
+    context_object_name = 'lookup_table_values'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lookup_table_name'] = 'Модели двигателей'
+        context['href_create'] = 'lookup_transmission_model_create'
+        context['href_update'] = 'lookup_transmission_model_update'
+        context['href_delete'] = 'lookup_transmission_model_delete'
+        return context
+
+
+class LookupTransmissionModelCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('silant.add_transmissionmodel',)
+    template_name = 'lookups/lookup_create.html'
+    form_class = TransmissionModelForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_transmission_model')
+
+
+class LookupTransmissionModelUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('silant.change_transmissionmodel',)
+    model = TransmissionModel
+    template_name = 'lookups/lookup_update.html'
+    form_class = TransmissionModelForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_transmission_model')
+
+
+class LookupTransmissionModelDeleteView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    permission_required = ('silant.delete_transmissionmodel',)
+    model = TransmissionModel
+    template_name = 'lookups/lookup_delete.html'
+    context_object_name = 'lookup_model'
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_transmission_model')
