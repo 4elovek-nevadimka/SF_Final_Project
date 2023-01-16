@@ -8,7 +8,8 @@ from silant.views import Index, MachineDetail, MaintenanceCreateView, ClaimCreat
     LookupDriveAxleModelCreateView, LookupDriveAxleModelUpdateView, LookupDriveAxleModelDeleteView, \
     LookupSteeringBridgeModelListView, LookupSteeringBridgeModelCreateView, LookupSteeringBridgeModelUpdateView, \
     LookupSteeringBridgeModelDeleteView, LookupMaintenanceTypeListView, LookupMaintenanceTypeCreateView, \
-    LookupMaintenanceTypeUpdateView, LookupMaintenanceTypeDeleteView
+    LookupMaintenanceTypeUpdateView, LookupMaintenanceTypeDeleteView, LookupFailureNodeListView, \
+    LookupFailureNodeCreateView, LookupFailureNodeUpdateView, LookupFailureNodeDeleteView
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
@@ -66,4 +67,11 @@ urlpatterns = [
          LookupMaintenanceTypeUpdateView.as_view(), name='lookup_maintenance_type_update'),
     path('lookup_maintenance_type_delete/<int:pk>/',
          LookupMaintenanceTypeDeleteView.as_view(), name='lookup_maintenance_type_delete'),
+
+    path('lookup_failure_node/', LookupFailureNodeListView.as_view(), name='lookup_failure_node'),
+    path('lookup_failure_node_create', LookupFailureNodeCreateView.as_view(), name='lookup_failure_node_create'),
+    path('lookup_failure_node_update/<int:pk>/',
+         LookupFailureNodeUpdateView.as_view(), name='lookup_failure_node_update'),
+    path('lookup_failure_node_delete/<int:pk>/',
+         LookupFailureNodeDeleteView.as_view(), name='lookup_failure_node_delete'),
 ]

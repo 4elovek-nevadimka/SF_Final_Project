@@ -5,9 +5,9 @@ from django.views.generic import ListView, DetailView, CreateView, TemplateView,
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
 from silant.forms import MaintenanceForm, ClaimForm, MachineForm, VehicleModelForm, EngineModelForm, \
-    TransmissionModelForm, DriveAxleModelForm, SteeringBridgeModelForm, MaintenanceTypeForm
+    TransmissionModelForm, DriveAxleModelForm, SteeringBridgeModelForm, MaintenanceTypeForm, FailureNodeForm
 from silant.models import Machine, Maintenance, Claim, VehicleModel, EngineModel, TransmissionModel, DriveAxleModel, \
-    SteeringBridgeModel, MaintenanceType
+    SteeringBridgeModel, MaintenanceType, FailureNode
 
 
 class Index(ListView):
@@ -363,3 +363,46 @@ class LookupMaintenanceTypeDeleteView(PermissionRequiredMixin, LoginRequiredMixi
     def get_success_url(self, **kwargs):
         return reverse('lookup_maintenance_type')
 
+
+class LookupFailureNodeListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('silant.view_failurenode',)
+    model = FailureNode
+    template_name = 'lookups/lookup_list.html'
+    context_object_name = 'lookup_table_values'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lookup_table_name'] = 'Узлы отказа'
+        context['href_create'] = 'lookup_failure_node_create'
+        context['href_update'] = 'lookup_failure_node_update'
+        context['href_delete'] = 'lookup_failure_node_delete'
+        return context
+
+
+class LookupFailureNodeCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('silant.add_failurenode',)
+    template_name = 'lookups/lookup_create.html'
+    form_class = FailureNodeForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_failure_node')
+
+
+class LookupFailureNodeUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('silant.change_failurenode',)
+    model = FailureNode
+    template_name = 'lookups/lookup_update.html'
+    form_class = FailureNodeForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_failure_node')
+
+
+class LookupFailureNodeDeleteView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    permission_required = ('silant.delete_failurenode',)
+    model = FailureNode
+    template_name = 'lookups/lookup_delete.html'
+    context_object_name = 'lookup_model'
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_failure_node')
