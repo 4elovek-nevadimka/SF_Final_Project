@@ -4,8 +4,8 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
-from silant.forms import MaintenanceForm, ClaimForm, MachineForm, VehicleModelForm
-from silant.models import Machine, Maintenance, Claim, VehicleModel
+from silant.forms import MaintenanceForm, ClaimForm, MachineForm, VehicleModelForm, EngineModelForm
+from silant.models import Machine, Maintenance, Claim, VehicleModel, EngineModel
 
 
 class Index(ListView):
@@ -140,3 +140,47 @@ class LookupVehicleModelDeleteView(PermissionRequiredMixin, LoginRequiredMixin, 
 
     def get_success_url(self, **kwargs):
         return reverse('lookup_vehicle_model')
+
+
+class LookupEngineModelListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('silant.view_enginemodel',)
+    model = EngineModel
+    template_name = 'lookups/lookup_list.html'
+    context_object_name = 'lookup_table_values'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lookup_table_name'] = 'Модели двигателей'
+        context['href_create'] = 'lookup_engine_model_create'
+        context['href_update'] = 'lookup_engine_model_update'
+        context['href_delete'] = 'lookup_engine_model_delete'
+        return context
+
+
+class LookupEngineModelCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('silant.add_enginemodel',)
+    template_name = 'lookups/lookup_create.html'
+    form_class = EngineModelForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_engine_model')
+
+
+class LookupEngineModelUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('silant.change_enginemodel',)
+    model = EngineModel
+    template_name = 'lookups/lookup_update.html'
+    form_class = EngineModelForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_engine_model')
+
+
+class LookupEngineModelDeleteView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    permission_required = ('silant.delete_enginemodel',)
+    model = EngineModel
+    template_name = 'lookups/lookup_delete.html'
+    context_object_name = 'lookup_model'
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_engine_model')

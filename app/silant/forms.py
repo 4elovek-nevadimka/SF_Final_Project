@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 from django.forms import ModelForm, DateInput
 
 from silant.models import Maintenance, Claim, Machine, VehicleModel
-from silant.models import Maintenance, Claim, Machine, VehicleModel
 
 
 class MachineForm(ModelForm):
@@ -66,6 +65,12 @@ class ClaimForm(ModelForm):
 
 
 class VehicleModelForm(ModelForm):
+    class Meta:
+        model = VehicleModel
+        fields = '__all__'
+
+
+class EngineModelForm(ModelForm):
     class Meta:
         model = VehicleModel
         fields = '__all__'

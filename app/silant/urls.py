@@ -2,7 +2,8 @@ from django.urls import path
 
 from silant.views import Index, MachineDetail, MaintenanceCreateView, ClaimCreateView, MachineCreateView, \
     LookupsListView, LookupVehicleModelListView, LookupVehicleModelUpdateView, LookupVehicleModelCreateView, \
-    LookupVehicleModelDeleteView
+    LookupVehicleModelDeleteView, LookupEngineModelListView, LookupEngineModelCreateView, LookupEngineModelUpdateView, \
+    LookupEngineModelDeleteView
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
@@ -20,5 +21,12 @@ urlpatterns = [
          LookupVehicleModelUpdateView.as_view(), name='lookup_vehicle_model_update'),
     path('lookup_vehicle_model_delete/<int:pk>/',
          LookupVehicleModelDeleteView.as_view(), name='lookup_vehicle_model_delete'),
+
+    path('lookup_engine_model/', LookupEngineModelListView.as_view(), name='lookup_engine_model'),
+    path('lookup_engine_model_create', LookupEngineModelCreateView.as_view(), name='lookup_engine_model_create'),
+    path('lookup_engine_model_update/<int:pk>/',
+         LookupEngineModelUpdateView.as_view(), name='lookup_engine_model_update'),
+    path('lookup_engine_model_delete/<int:pk>/',
+         LookupEngineModelDeleteView.as_view(), name='lookup_engine_model_delete'),
 
 ]
