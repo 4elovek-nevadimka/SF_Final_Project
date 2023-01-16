@@ -5,8 +5,9 @@ from django.views.generic import ListView, DetailView, CreateView, TemplateView,
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
 from silant.forms import MaintenanceForm, ClaimForm, MachineForm, VehicleModelForm, EngineModelForm, \
-    TransmissionModelForm, DriveAxleModelForm
-from silant.models import Machine, Maintenance, Claim, VehicleModel, EngineModel, TransmissionModel, DriveAxleModel
+    TransmissionModelForm, DriveAxleModelForm, SteeringBridgeModelForm
+from silant.models import Machine, Maintenance, Claim, VehicleModel, EngineModel, TransmissionModel, DriveAxleModel, \
+    SteeringBridgeModel
 
 
 class Index(ListView):
@@ -195,7 +196,7 @@ class LookupTransmissionModelListView(PermissionRequiredMixin, LoginRequiredMixi
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['lookup_table_name'] = 'Модели двигателей'
+        context['lookup_table_name'] = 'Модели трансмиссий'
         context['href_create'] = 'lookup_transmission_model_create'
         context['href_update'] = 'lookup_transmission_model_update'
         context['href_delete'] = 'lookup_transmission_model_delete'
@@ -239,7 +240,7 @@ class LookupDriveAxleModelListView(PermissionRequiredMixin, LoginRequiredMixin, 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['lookup_table_name'] = 'Модели двигателей'
+        context['lookup_table_name'] = 'Модели ведущих мостов'
         context['href_create'] = 'lookup_drive_axle_model_create'
         context['href_update'] = 'lookup_drive_axle_model_update'
         context['href_delete'] = 'lookup_drive_axle_model_delete'
@@ -273,3 +274,47 @@ class LookupDriveAxleModelDeleteView(PermissionRequiredMixin, LoginRequiredMixin
 
     def get_success_url(self, **kwargs):
         return reverse('lookup_drive_axle_model')
+
+
+class LookupSteeringBridgeModelListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('silant.view_steeringbridgemodel',)
+    model = SteeringBridgeModel
+    template_name = 'lookups/lookup_list.html'
+    context_object_name = 'lookup_table_values'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lookup_table_name'] = 'Модели управляемых мостов'
+        context['href_create'] = 'lookup_steering_bridge_model_create'
+        context['href_update'] = 'lookup_steering_bridge_model_update'
+        context['href_delete'] = 'lookup_steering_bridge_model_delete'
+        return context
+
+
+class LookupSteeringBridgeModelCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('silant.add_steeringbridgemodel',)
+    template_name = 'lookups/lookup_create.html'
+    form_class = SteeringBridgeModelForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_steering_bridge_model')
+
+
+class LookupSteeringBridgeModelUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('silant.change_steeringbridgemodel',)
+    model = SteeringBridgeModel
+    template_name = 'lookups/lookup_update.html'
+    form_class = SteeringBridgeModelForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_steering_bridge_model')
+
+
+class LookupSteeringBridgeModelDeleteView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    permission_required = ('silant.delete_steeringbridgemodel',)
+    model = SteeringBridgeModel
+    template_name = 'lookups/lookup_delete.html'
+    context_object_name = 'lookup_model'
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_steering_bridge_model')

@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.forms import ModelForm, DateInput
 
-from silant.models import Maintenance, Claim, Machine, VehicleModel, EngineModel, TransmissionModel, DriveAxleModel
+from silant.models import Maintenance, Claim, Machine, VehicleModel, EngineModel, TransmissionModel, DriveAxleModel, \
+    SteeringBridgeModel
 
 
 class MachineForm(ModelForm):
@@ -85,4 +86,10 @@ class TransmissionModelForm(ModelForm):
 class DriveAxleModelForm(ModelForm):
     class Meta:
         model = DriveAxleModel
+        fields = '__all__'
+
+
+class SteeringBridgeModelForm(ModelForm):
+    class Meta:
+        model = SteeringBridgeModel
         fields = '__all__'
