@@ -5,9 +5,9 @@ from django.views.generic import ListView, DetailView, CreateView, TemplateView,
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
 from silant.forms import MaintenanceForm, ClaimForm, MachineForm, VehicleModelForm, EngineModelForm, \
-    TransmissionModelForm, DriveAxleModelForm, SteeringBridgeModelForm
+    TransmissionModelForm, DriveAxleModelForm, SteeringBridgeModelForm, MaintenanceTypeForm
 from silant.models import Machine, Maintenance, Claim, VehicleModel, EngineModel, TransmissionModel, DriveAxleModel, \
-    SteeringBridgeModel
+    SteeringBridgeModel, MaintenanceType
 
 
 class Index(ListView):
@@ -318,3 +318,48 @@ class LookupSteeringBridgeModelDeleteView(PermissionRequiredMixin, LoginRequired
 
     def get_success_url(self, **kwargs):
         return reverse('lookup_steering_bridge_model')
+
+
+class LookupMaintenanceTypeListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('silant.view_maintenancetype',)
+    model = MaintenanceType
+    template_name = 'lookups/lookup_list.html'
+    context_object_name = 'lookup_table_values'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lookup_table_name'] = 'Виды ТО'
+        context['href_create'] = 'lookup_maintenance_type_create'
+        context['href_update'] = 'lookup_maintenance_type_update'
+        context['href_delete'] = 'lookup_maintenance_type_delete'
+        return context
+
+
+class LookupMaintenanceTypeCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('silant.add_maintenancetype',)
+    template_name = 'lookups/lookup_create.html'
+    form_class = MaintenanceTypeForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_maintenance_type')
+
+
+class LookupMaintenanceTypeUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('silant.change_maintenancetype',)
+    model = MaintenanceType
+    template_name = 'lookups/lookup_update.html'
+    form_class = MaintenanceTypeForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_maintenance_type')
+
+
+class LookupMaintenanceTypeDeleteView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    permission_required = ('silant.delete_maintenancetype',)
+    model = MaintenanceType
+    template_name = 'lookups/lookup_delete.html'
+    context_object_name = 'lookup_model'
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_maintenance_type')
+

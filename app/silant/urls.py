@@ -7,7 +7,8 @@ from silant.views import Index, MachineDetail, MaintenanceCreateView, ClaimCreat
     LookupTransmissionModelUpdateView, LookupTransmissionModelDeleteView, LookupDriveAxleModelListView, \
     LookupDriveAxleModelCreateView, LookupDriveAxleModelUpdateView, LookupDriveAxleModelDeleteView, \
     LookupSteeringBridgeModelListView, LookupSteeringBridgeModelCreateView, LookupSteeringBridgeModelUpdateView, \
-    LookupSteeringBridgeModelDeleteView
+    LookupSteeringBridgeModelDeleteView, LookupMaintenanceTypeListView, LookupMaintenanceTypeCreateView, \
+    LookupMaintenanceTypeUpdateView, LookupMaintenanceTypeDeleteView
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
@@ -57,4 +58,12 @@ urlpatterns = [
          LookupSteeringBridgeModelUpdateView.as_view(), name='lookup_steering_bridge_model_update'),
     path('lookup_steering_bridge_model_delete/<int:pk>/',
          LookupSteeringBridgeModelDeleteView.as_view(), name='lookup_steering_bridge_model_delete'),
+
+    path('lookup_maintenance_type/', LookupMaintenanceTypeListView.as_view(), name='lookup_maintenance_type'),
+    path('lookup_maintenance_type_create',
+         LookupMaintenanceTypeCreateView.as_view(), name='lookup_maintenance_type_create'),
+    path('lookup_maintenance_type_update/<int:pk>/',
+         LookupMaintenanceTypeUpdateView.as_view(), name='lookup_maintenance_type_update'),
+    path('lookup_maintenance_type_delete/<int:pk>/',
+         LookupMaintenanceTypeDeleteView.as_view(), name='lookup_maintenance_type_delete'),
 ]
