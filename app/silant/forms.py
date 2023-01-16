@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.forms import ModelForm, DateInput
 
-from silant.models import Maintenance, Claim, Machine
+from silant.models import Maintenance, Claim, Machine, VehicleModel
+from silant.models import Maintenance, Claim, Machine, VehicleModel
 
 
 class MachineForm(ModelForm):
@@ -62,3 +63,9 @@ class ClaimForm(ModelForm):
                        'placeholder': 'Select a date',
                        'type': 'date'})
         }
+
+
+class VehicleModelForm(ModelForm):
+    class Meta:
+        model = VehicleModel
+        fields = '__all__'

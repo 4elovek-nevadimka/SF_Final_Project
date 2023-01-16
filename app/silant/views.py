@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView, TemplateView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
-from silant.forms import MaintenanceForm, ClaimForm, MachineForm
-from silant.models import Machine, Maintenance, Claim
+from silant.forms import MaintenanceForm, ClaimForm, MachineForm, VehicleModelForm
+from silant.models import Machine, Maintenance, Claim, VehicleModel
 
 
 class Index(ListView):
@@ -90,8 +90,53 @@ class ClaimCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
 
 # List / Create / Update / Delete Views для справочников
 class LookupsListView(PermissionRequiredMixin, LoginRequiredMixin, TemplateView):
-    permission_required = ('silant.view_vehicle_model', 'silant.view_engine_model', 'silant.view_transmission_model',
-                           'silant.view_drive_axle_model', 'silant.view_steering_bridge_model',
-                           'silant.view_maintenance_type',
-                           'silant.view_failure_node', 'silant.view_recovery_method')
+    permission_required = ('silant.view_vehiclemodel', 'silant.view_enginemodel', 'silant.view_transmissionmodel',
+                           'silant.view_driveaxlemodel', 'silant.view_steeringbridgemodel',
+                           'silant.view_maintenancetype',
+                           'silant.view_failurenode', 'silant.view_recoverymethod')
     template_name = 'lookups/lookups_list.html'
+
+
+class LookupVehicleModelListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('silant.view_vehiclemodel',)
+    model = VehicleModel
+    template_name = 'lookups/lookup_list.html'
+    context_object_name = 'lookup_table_values'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lookup_table_name'] = 'Модели техники'
+        # context['href_create'] = reverse('index')
+        context['href_create'] = 'lookup_vehicle_model_create'
+        context['href_update'] = 'lookup_vehicle_model_update'
+        context['href_delete'] = 'lookup_vehicle_model_delete'
+        return context
+
+
+class LookupVehicleModelCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('silant.add_vehiclemodel',)
+    template_name = 'lookups/lookup_create.html'
+    form_class = VehicleModelForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_vehicle_model')
+
+
+class LookupVehicleModelUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('silant.change_vehiclemodel',)
+    model = VehicleModel
+    template_name = 'lookups/lookup_update.html'
+    form_class = VehicleModelForm
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_vehicle_model')
+
+
+class LookupVehicleModelDeleteView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    permission_required = ('silant.delete_vehiclemodel',)
+    model = VehicleModel
+    template_name = 'lookups/lookup_delete.html'
+    context_object_name = 'lookup_model'
+
+    def get_success_url(self, **kwargs):
+        return reverse('lookup_vehicle_model')
