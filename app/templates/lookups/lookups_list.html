@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "default.html" %}
 
-</body>
-</html>
+{% load static %}
+
+{% block title %}
+Справочники
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <div class="card my-2 py-2">
+        <a href="javascript:history.back()">
+            <img class="zoom-btn mx-1 my-1"
+                 src="{% static 'images/go_back.png' %}" alt="Go back" width="60" height="25">
+        </a>
+        <div align="center" style="margin: auto;">
+            <h2>
+                Справочники:
+            </h2>
+            <p>
+                <a href="{% url 'lookup_vehicle_model'%}" class="link-primary">Модель техники</a>
+            </p>
+            <p>
+
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

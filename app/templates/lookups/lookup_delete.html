@@ -1,0 +1,12 @@
+{% extends "default_form.html" %}
+
+{% block title %}
+Удалить модель
+{% endblock title %}
+
+{% block submit %}
+    <h4>
+        Вы действительно хотите удалить {{ lookup_model.name }}?
+    </h4>
+    <input class="btn my-2 brand-btn text-white" type="submit" value="Удалить">
+{% endblock submit %}
