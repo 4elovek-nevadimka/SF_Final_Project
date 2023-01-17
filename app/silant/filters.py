@@ -8,6 +8,11 @@ class GuestFilter(FilterSet):
         model = Machine
         fields = ('serial_number',)
 
+    def __init__(self, *args, **kwargs):
+        super(GuestFilter, self).__init__(*args, **kwargs)
+        if self.data == {}:
+            self.queryset = self.queryset.none()
+
 
 class MachineFilter(FilterSet):
     class Meta:
@@ -18,6 +23,11 @@ class MachineFilter(FilterSet):
                   'drive_axle_model',
                   'steering_bridge_model',)
 
+    def __init__(self, *args, **kwargs):
+        super(MachineFilter, self).__init__(*args, **kwargs)
+        if self.data == {}:
+            self.queryset = self.queryset.none()
+
 
 class MaintenanceFilter(FilterSet):
     class Meta:
@@ -26,6 +36,11 @@ class MaintenanceFilter(FilterSet):
                   'machine__serial_number',
                   'service_company',)
 
+    def __init__(self, *args, **kwargs):
+        super(MaintenanceFilter, self).__init__(*args, **kwargs)
+        if self.data == {}:
+            self.queryset = self.queryset.none()
+
 
 class ClaimFilter(FilterSet):
     class Meta:
@@ -33,3 +48,8 @@ class ClaimFilter(FilterSet):
         fields = ('failure_node',
                   'recovery_method',
                   'machine__service_company',)
+
+    def __init__(self, *args, **kwargs):
+        super(ClaimFilter, self).__init__(*args, **kwargs)
+        if self.data == {}:
+            self.queryset = self.queryset.none()
