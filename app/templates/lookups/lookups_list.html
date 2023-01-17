@@ -1,43 +1,31 @@
-{% extends "default.html" %}
-
-{% load static %}
+{% extends "default_list.html" %}
 
 {% block title %}
 Справочники
 {% endblock title %}
 
-{% block content %}
+{% block list %}
 
-<div class="container">
-    <div class="card my-2 py-2">
-        <a href="javascript:history.back()">
-            <img class="zoom-btn mx-1 my-1"
-                 src="{% static 'images/go_back.png' %}" alt="Go back" width="60" height="25">
-        </a>
-        <div align="center" style="margin: auto;">
-            <h2>
-                Справочники
-            </h2>
-            <div class="d-grid gap-3 my-2">
-                <a class="btn btn-block brand-btn text-white"
-                   href="{% url 'lookup_vehicle_model'%}" role="button">Модели техники</a>
-                <a class="btn brand-btn text-white"
-                   href="{% url 'lookup_engine_model'%}" role="button">Модели двигателей</a>
-                <a class="btn brand-btn text-white"
-                   href="{% url 'lookup_transmission_model'%}" role="button">Модели трансмиссий</a>
-                <a class="btn brand-btn text-white"
-                   href="{% url 'lookup_drive_axle_model'%}" role="button">Модели ведущих мостов</a>
-                <a class="btn brand-btn text-white"
-                   href="{% url 'lookup_steering_bridge_model'%}" role="button">Модели управляемых мостов</a>
-                <a class="btn brand-btn text-white"
-                   href="{% url 'lookup_maintenance_type'%}" role="button">Виды ТО</a>
-                <a class="btn brand-btn text-white"
-                   href="{% url 'lookup_failure_node'%}" role="button">Узлы отказа</a>
-                <a class="btn brand-btn text-white"
-                   href="{% url 'lookup_recovery_method'%}" role="button">Способы восстановления</a>
-            </div>
-        </div>
-    </div>
+<h2>
+    Справочники
+</h2>
+<div class="d-grid gap-3 my-2">
+    <a class="btn btn-block brand-btn text-white"
+       href="{% url 'lookup_vehicle_model'%}" role="button">Модели техники</a>
+    <a class="btn brand-btn text-white"
+       href="{% url 'lookup_engine_model'%}" role="button">Модели двигателей</a>
+    <a class="btn brand-btn text-white"
+       href="{% url 'lookup_transmission_model'%}" role="button">Модели трансмиссий</a>
+    <a class="btn brand-btn text-white"
+       href="{% url 'lookup_drive_axle_model'%}" role="button">Модели ведущих мостов</a>
+    <a class="btn brand-btn text-white"
+       href="{% url 'lookup_steering_bridge_model'%}" role="button">Модели управляемых мостов</a>
+    <a class="btn brand-btn text-white"
+       href="{% url 'lookup_maintenance_type'%}" role="button">Виды ТО</a>
+    <a class="btn brand-btn text-white"
+       href="{% url 'lookup_failure_node'%}" role="button">Узлы отказа</a>
+    <a class="btn brand-btn text-white"
+       href="{% url 'lookup_recovery_method'%}" role="button">Способы восстановления</a>
 </div>
 
-{% endblock content %}
+{% endblock list %}

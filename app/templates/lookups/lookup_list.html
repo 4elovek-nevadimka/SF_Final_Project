@@ -1,58 +1,46 @@
-{% extends "default.html" %}
-
-{% load static %}
+{% extends "default_list.html" %}
 
 {% block title %}
 {{ lookup_table_name }}
 {% endblock title %}
 
-{% block content %}
+{% block list %}
 
-<div class="container">
-    <div class="card my-2 py-2">
-        <a href="javascript:history.back()">
-            <img class="zoom-btn mx-1 my-1"
-                 src="{% static 'images/go_back.png' %}" alt="Go back" width="60" height="25">
-        </a>
-        <div align="center" style="margin: auto;">
-            <h2>
-                {{ lookup_table_name }}
-            </h2>
+<h2>
+    {{ lookup_table_name }}
+</h2>
 
-            <div align="right">
-                <a class="btn brand-btn text-white" href="{% url href_create %}" role="button">Добавить</a>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-striped align-middle text-center">
-                    <thead>
-                    <tr>
-                        <th>Наименование</th>
-                        <th>Описание</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for lookup_table_value in lookup_table_values %}
-                    <tr>
-                        <td>{{ lookup_table_value.name }}</td>
-                        <td>{{ lookup_table_value.description }}</td>
-                        <td>
-                            <a class="btn brand-btn text-white"
-                               href="{% url href_update pk=lookup_table_value.id %}" role="button">Изменить</a>
-                        </td>
-                        <td>
-                            <a class="btn brand-btn text-white"
-                               href="{% url href_delete pk=lookup_table_value.id %}" role="button">Удалить</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<div align="right">
+    <a class="btn brand-btn text-white" href="{% url href_create %}" role="button">Добавить</a>
 </div>
 
-{% endblock content %}
+<div class="table-responsive">
+    <table class="table table-striped align-middle text-center">
+        <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Описание</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for lookup_table_value in lookup_table_values %}
+        <tr>
+            <td>{{ lookup_table_value.name }}</td>
+            <td>{{ lookup_table_value.description }}</td>
+            <td>
+                <a class="btn brand-btn text-white"
+                   href="{% url href_update pk=lookup_table_value.id %}" role="button">Изменить</a>
+            </td>
+            <td>
+                <a class="btn brand-btn text-white"
+                   href="{% url href_delete pk=lookup_table_value.id %}" role="button">Удалить</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock list %}
