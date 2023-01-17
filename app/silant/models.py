@@ -26,24 +26,24 @@ class Machine(models.Model):
     # Зав. № машины
     serial_number = models.CharField(max_length=32, unique=True, verbose_name='Заводской номер машины')
     # Модель техники
-    vehicle_model = models.ForeignKey('VehicleModel', on_delete=models.DO_NOTHING, verbose_name='Модель техники')
+    vehicle_model = models.ForeignKey('VehicleModel', on_delete=models.CASCADE, verbose_name='Модель техники')
     # Модель двигателя
-    engine_model = models.ForeignKey('EngineModel', on_delete=models.DO_NOTHING, verbose_name='Модель двигателя')
+    engine_model = models.ForeignKey('EngineModel', on_delete=models.CASCADE, verbose_name='Модель двигателя')
     # Зав. № двигателя
     engine_serial_number = models.CharField(max_length=32, verbose_name='Зав. № двигателя')
     # Модель трансмиссии
     transmission_model = models.ForeignKey(
-        'TransmissionModel', on_delete=models.DO_NOTHING, verbose_name='Модель трансмиссии')
+        'TransmissionModel', on_delete=models.CASCADE, verbose_name='Модель трансмиссии')
     # Зав. № трансмиссии
     transmission_serial_number = models.CharField(max_length=32, verbose_name='Зав. № трансмиссии')
     # Модель ведущего моста
     drive_axle_model = models.ForeignKey(
-        'DriveAxleModel', on_delete=models.DO_NOTHING, verbose_name='Модель ведущего моста')
+        'DriveAxleModel', on_delete=models.CASCADE, verbose_name='Модель ведущего моста')
     # Зав. № ведущего моста
     drive_axle_serial_number = models.CharField(max_length=32, verbose_name='Зав. № ведущего моста')
     # Модель управляемого моста
     steering_bridge_model = models.ForeignKey(
-        'SteeringBridgeModel', on_delete=models.DO_NOTHING, verbose_name='Модель управляемого моста')
+        'SteeringBridgeModel', on_delete=models.CASCADE, verbose_name='Модель управляемого моста')
     # Зав. № управляемого моста
     steering_bridge_serial_number = models.CharField(max_length=32, verbose_name='Зав. № управляемого моста')
     # Договор поставки №, дата
@@ -58,10 +58,10 @@ class Machine(models.Model):
     equipment = models.CharField(max_length=512, verbose_name='Комплектация (доп. опции)')
     # Клиент
     client = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='client',
-                               on_delete=models.DO_NOTHING, verbose_name='Клиент')
+                               on_delete=models.CASCADE, verbose_name='Клиент')
     # Сервисная компания
     service_company = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='service_company',
-                                        on_delete=models.DO_NOTHING, verbose_name='Сервисная компания')
+                                        on_delete=models.CASCADE, verbose_name='Сервисная компания')
 
     class Meta:
         verbose_name = 'Машина'
@@ -74,7 +74,7 @@ class Machine(models.Model):
 
 class Maintenance(models.Model):
     # Вид ТО
-    maintenance_type = models.ForeignKey('MaintenanceType', on_delete=models.DO_NOTHING, verbose_name='Вид ТО')
+    maintenance_type = models.ForeignKey('MaintenanceType', on_delete=models.CASCADE, verbose_name='Вид ТО')
     # Дата проведения ТО
     maintenance_date = models.DateField(verbose_name='Дата проведения ТО')
     # Наработка, м/час
@@ -85,9 +85,9 @@ class Maintenance(models.Model):
     work_order_date = models.DateField(verbose_name='дата заказ-наряда')
     # Организация, проводившая ТО
     service_company = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, verbose_name='Сервисная компания')
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Сервисная компания')
     # Машина
-    machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING, verbose_name='Модель техники')
+    machine = models.ForeignKey('Machine', on_delete=models.CASCADE, verbose_name='Модель техники')
 
     class Meta:
         verbose_name = 'Техническое обслуживание'
@@ -104,12 +104,12 @@ class Claim(models.Model):
     # Наработка, м/час
     operating_time = models.PositiveIntegerField(verbose_name='Наработка, м/час')
     # Узел отказа
-    failure_node = models.ForeignKey('FailureNode', on_delete=models.DO_NOTHING, verbose_name='Узел отказа')
+    failure_node = models.ForeignKey('FailureNode', on_delete=models.CASCADE, verbose_name='Узел отказа')
     # Описание отказа
     failure_description = models.CharField(max_length=512,  verbose_name='Описание отказа')
     # Способ восстановления
     recovery_method = models.ForeignKey(
-        'RecoveryMethod', on_delete=models.DO_NOTHING, verbose_name='Способ восстановления')
+        'RecoveryMethod', on_delete=models.CASCADE, verbose_name='Способ восстановления')
     # Используемые запасные части
     spare_parts = models.CharField(max_length=512, verbose_name='Используемые запасные части')
     # Дата восстановления
@@ -117,7 +117,7 @@ class Claim(models.Model):
     # Время простоя техники
     machine_downtime = models.PositiveIntegerField(null=True, verbose_name='Время простоя техники')
     # Машина
-    machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING, verbose_name='Модель техники')
+    machine = models.ForeignKey('Machine', on_delete=models.CASCADE, verbose_name='Модель техники')
 
     class Meta:
         verbose_name = 'Рекламация'
