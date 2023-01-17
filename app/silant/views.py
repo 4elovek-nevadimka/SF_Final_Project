@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
+from rest_framework import viewsets
 
 from silant.filters import GuestFilter, MachineFilter, MaintenanceFilter, ClaimFilter
 from silant.forms import MaintenanceForm, ClaimForm, MachineForm, VehicleModelForm, EngineModelForm, \
@@ -9,6 +10,7 @@ from silant.forms import MaintenanceForm, ClaimForm, MachineForm, VehicleModelFo
     RecoveryMethodForm
 from silant.models import Machine, Maintenance, Claim, VehicleModel, EngineModel, TransmissionModel, DriveAxleModel, \
     SteeringBridgeModel, MaintenanceType, FailureNode, RecoveryMethod
+from silant.serializers import MachineSerializer, MaintenanceSerializer, ClaimSerializer
 
 
 class Index(ListView):
@@ -499,3 +501,18 @@ class LookupRecoveryMethodDeleteView(PermissionRequiredMixin, LoginRequiredMixin
 
     def get_success_url(self, **kwargs):
         return reverse('lookup_recovery_method')
+
+
+class MachineApiViewSet(viewsets.ModelViewSet):
+    queryset = Machine.objects.all()
+    serializer_class = MachineSerializer
+
+
+class MaintenanceApiViewSet(viewsets.ModelViewSet):
+    queryset = Maintenance.objects.all()
+    serializer_class = MaintenanceSerializer
+
+
+class ClaimApiViewSet(viewsets.ModelViewSet):
+    queryset = Claim.objects.all()
+    serializer_class = ClaimSerializer

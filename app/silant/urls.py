@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 
 from silant.views import Index, MachineDetail, MaintenanceCreateView, ClaimCreateView, MachineCreateView, \
     LookupsListView, LookupVehicleModelListView, LookupVehicleModelUpdateView, LookupVehicleModelCreateView, \
@@ -13,9 +14,17 @@ from silant.views import Index, MachineDetail, MaintenanceCreateView, ClaimCreat
     LookupRecoveryMethodListView, LookupRecoveryMethodCreateView, LookupRecoveryMethodUpdateView, \
     LookupRecoveryMethodDeleteView, LookupVehicleModelDetailView, LookupEngineModelDetailView, \
     LookupTransmissionModelDetailView, LookupDriveAxleModelDetailView, LookupSteeringBridgeModelDetailView, \
-    LookupMaintenanceTypeDetailView, LookupFailureNodeDetailView, LookupRecoveryMethodDetailView
+    LookupMaintenanceTypeDetailView, LookupFailureNodeDetailView, LookupRecoveryMethodDetailView, MachineApiViewSet, \
+    MaintenanceApiViewSet, ClaimApiViewSet
+
+api_router = routers.DefaultRouter()
+api_router.register(r'machines', MachineApiViewSet)
+api_router.register(r'maintenance', MaintenanceApiViewSet)
+api_router.register(r'claims', ClaimApiViewSet)
 
 urlpatterns = [
+    path('api/', include(api_router.urls)),
+
     path('', Index.as_view(), name='index'),
     path('machine/<int:pk>/', MachineDetail.as_view(), name='machine_detail'),
 
