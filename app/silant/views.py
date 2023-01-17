@@ -116,6 +116,12 @@ class LookupVehicleModelListView(PermissionRequiredMixin, LoginRequiredMixin, Li
         return context
 
 
+class LookupVehicleModelDetailView(DetailView):
+    model = VehicleModel
+    template_name = 'lookups/lookup_detail.html'
+    context_object_name = 'lookup_model'
+
+
 class LookupVehicleModelCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     permission_required = ('silant.add_vehiclemodel',)
     template_name = 'lookups/lookup_create.html'
@@ -158,6 +164,12 @@ class LookupEngineModelListView(PermissionRequiredMixin, LoginRequiredMixin, Lis
         context['href_update'] = 'lookup_engine_model_update'
         context['href_delete'] = 'lookup_engine_model_delete'
         return context
+
+
+class LookupEngineModelDetailView(DetailView):
+    model = EngineModel
+    template_name = 'lookups/lookup_detail.html'
+    context_object_name = 'lookup_model'
 
 
 class LookupEngineModelCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
@@ -204,6 +216,12 @@ class LookupTransmissionModelListView(PermissionRequiredMixin, LoginRequiredMixi
         return context
 
 
+class LookupTransmissionModelDetailView(DetailView):
+    model = TransmissionModel
+    template_name = 'lookups/lookup_detail.html'
+    context_object_name = 'lookup_model'
+
+
 class LookupTransmissionModelCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     permission_required = ('silant.add_transmissionmodel',)
     template_name = 'lookups/lookup_create.html'
@@ -246,6 +264,12 @@ class LookupDriveAxleModelListView(PermissionRequiredMixin, LoginRequiredMixin, 
         context['href_update'] = 'lookup_drive_axle_model_update'
         context['href_delete'] = 'lookup_drive_axle_model_delete'
         return context
+
+
+class LookupDriveAxleModelDetailView(DetailView):
+    model = DriveAxleModel
+    template_name = 'lookups/lookup_detail.html'
+    context_object_name = 'lookup_model'
 
 
 class LookupDriveAxleModelCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
@@ -292,6 +316,12 @@ class LookupSteeringBridgeModelListView(PermissionRequiredMixin, LoginRequiredMi
         return context
 
 
+class LookupSteeringBridgeModelDetailView(DetailView):
+    model = SteeringBridgeModel
+    template_name = 'lookups/lookup_detail.html'
+    context_object_name = 'lookup_model'
+
+
 class LookupSteeringBridgeModelCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     permission_required = ('silant.add_steeringbridgemodel',)
     template_name = 'lookups/lookup_create.html'
@@ -334,6 +364,12 @@ class LookupMaintenanceTypeListView(PermissionRequiredMixin, LoginRequiredMixin,
         context['href_update'] = 'lookup_maintenance_type_update'
         context['href_delete'] = 'lookup_maintenance_type_delete'
         return context
+
+
+class LookupMaintenanceTypeDetailView(DetailView):
+    model = MaintenanceType
+    template_name = 'lookups/lookup_detail.html'
+    context_object_name = 'lookup_model'
 
 
 class LookupMaintenanceTypeCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
@@ -380,6 +416,12 @@ class LookupFailureNodeListView(PermissionRequiredMixin, LoginRequiredMixin, Lis
         return context
 
 
+class LookupFailureNodeDetailView(DetailView):
+    model = FailureNode
+    template_name = 'lookups/lookup_detail.html'
+    context_object_name = 'lookup_model'
+
+
 class LookupFailureNodeCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     permission_required = ('silant.add_failurenode',)
     template_name = 'lookups/lookup_create.html'
@@ -422,6 +464,12 @@ class LookupRecoveryMethodListView(PermissionRequiredMixin, LoginRequiredMixin, 
         context['href_update'] = 'lookup_recovery_method_update'
         context['href_delete'] = 'lookup_recovery_method_delete'
         return context
+
+
+class LookupRecoveryMethodDetailView(DetailView):
+    model = RecoveryMethod
+    template_name = 'lookups/lookup_detail.html'
+    context_object_name = 'lookup_model'
 
 
 class LookupRecoveryMethodCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):

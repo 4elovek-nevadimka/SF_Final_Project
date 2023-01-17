@@ -58,9 +58,17 @@
                 </td>
                 <td>{{ claim.failure_date }}</td>
                 <td>{{ claim.operating_time }}</td>
-                <td>{{ claim.failure_node }}</td>
+                <td>
+                    <a href="{% url 'lookup_failure_node_detail' claim.failure_node.id %}">
+                        {{ claim.failure_node.name }}
+                    </a>
+                </td>
                 <td>{{ claim.failure_description }}</td>
-                <td>{{ claim.recovery_method }}</td>
+                <td>
+                    <a href="{% url 'lookup_recovery_method_detail' claim.recovery_method.id %}">
+                        {{ claim.recovery_method.name }}
+                    </a>
+                </td>
                 <td>{{ claim.spare_parts }}</td>
                 <td>{{ claim.recovery_date }}</td>
                 <td>{{ claim.machine_downtime }}</td>

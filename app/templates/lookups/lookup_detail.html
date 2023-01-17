@@ -1,0 +1,22 @@
+{% extends "default_list.html" %}
+
+{% block title %}
+{{ lookup_model.name }}
+{% endblock title %}
+
+{% block list %}
+
+<h5>
+    Наименование
+</h5>
+<p>
+    {{ lookup_model.name }}
+</p>
+<h5>
+    Описание
+</h5>
+<p>
+    {{ lookup_model.description }}
+</p>
+
+{% endblock list %}

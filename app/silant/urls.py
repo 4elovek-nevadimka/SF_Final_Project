@@ -11,7 +11,9 @@ from silant.views import Index, MachineDetail, MaintenanceCreateView, ClaimCreat
     LookupMaintenanceTypeUpdateView, LookupMaintenanceTypeDeleteView, LookupFailureNodeListView, \
     LookupFailureNodeCreateView, LookupFailureNodeUpdateView, LookupFailureNodeDeleteView, \
     LookupRecoveryMethodListView, LookupRecoveryMethodCreateView, LookupRecoveryMethodUpdateView, \
-    LookupRecoveryMethodDeleteView
+    LookupRecoveryMethodDeleteView, LookupVehicleModelDetailView, LookupEngineModelDetailView, \
+    LookupTransmissionModelDetailView, LookupDriveAxleModelDetailView, LookupSteeringBridgeModelDetailView, \
+    LookupMaintenanceTypeDetailView, LookupFailureNodeDetailView, LookupRecoveryMethodDetailView
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
@@ -24,6 +26,7 @@ urlpatterns = [
     path('lookups_list/', LookupsListView.as_view(), name='lookups_list'),
 
     path('lookup_vehicle_model/', LookupVehicleModelListView.as_view(), name='lookup_vehicle_model'),
+    path('lookup_vehicle_model/<int:pk>/', LookupVehicleModelDetailView.as_view(), name='lookup_vehicle_model_detail'),
     path('lookup_vehicle_model_create', LookupVehicleModelCreateView.as_view(), name='lookup_vehicle_model_create'),
     path('lookup_vehicle_model_update/<int:pk>/',
          LookupVehicleModelUpdateView.as_view(), name='lookup_vehicle_model_update'),
@@ -31,6 +34,7 @@ urlpatterns = [
          LookupVehicleModelDeleteView.as_view(), name='lookup_vehicle_model_delete'),
 
     path('lookup_engine_model/', LookupEngineModelListView.as_view(), name='lookup_engine_model'),
+    path('lookup_engine_model/<int:pk>/', LookupEngineModelDetailView.as_view(), name='lookup_engine_model_detail'),
     path('lookup_engine_model_create', LookupEngineModelCreateView.as_view(), name='lookup_engine_model_create'),
     path('lookup_engine_model_update/<int:pk>/',
          LookupEngineModelUpdateView.as_view(), name='lookup_engine_model_update'),
@@ -38,6 +42,8 @@ urlpatterns = [
          LookupEngineModelDeleteView.as_view(), name='lookup_engine_model_delete'),
 
     path('lookup_transmission_model/', LookupTransmissionModelListView.as_view(), name='lookup_transmission_model'),
+    path('lookup_transmission_model/<int:pk>/',
+         LookupTransmissionModelDetailView.as_view(), name='lookup_transmission_model_detail'),
     path('lookup_transmission_model_create',
          LookupTransmissionModelCreateView.as_view(), name='lookup_transmission_model_create'),
     path('lookup_transmission_model_update/<int:pk>/',
@@ -46,6 +52,8 @@ urlpatterns = [
          LookupTransmissionModelDeleteView.as_view(), name='lookup_transmission_model_delete'),
 
     path('lookup_drive_axle_model/', LookupDriveAxleModelListView.as_view(), name='lookup_drive_axle_model'),
+    path('lookup_drive_axle_model/<int:pk>/',
+         LookupDriveAxleModelDetailView.as_view(), name='lookup_drive_axle_model_detail'),
     path('lookup_drive_axle_model_create',
          LookupDriveAxleModelCreateView.as_view(), name='lookup_drive_axle_model_create'),
     path('lookup_drive_axle_model_update/<int:pk>/',
@@ -55,6 +63,8 @@ urlpatterns = [
 
     path('lookup_steering_bridge_model/',
          LookupSteeringBridgeModelListView.as_view(), name='lookup_steering_bridge_model'),
+    path('lookup_steering_bridge_model/<int:pk>/',
+         LookupSteeringBridgeModelDetailView.as_view(), name='lookup_steering_bridge_model_detail'),
     path('lookup_steering_bridge_model_create',
          LookupSteeringBridgeModelCreateView.as_view(), name='lookup_steering_bridge_model_create'),
     path('lookup_steering_bridge_model_update/<int:pk>/',
@@ -63,6 +73,8 @@ urlpatterns = [
          LookupSteeringBridgeModelDeleteView.as_view(), name='lookup_steering_bridge_model_delete'),
 
     path('lookup_maintenance_type/', LookupMaintenanceTypeListView.as_view(), name='lookup_maintenance_type'),
+    path('lookup_maintenance_type/<int:pk>/',
+         LookupMaintenanceTypeDetailView.as_view(), name='lookup_maintenance_type_detail'),
     path('lookup_maintenance_type_create',
          LookupMaintenanceTypeCreateView.as_view(), name='lookup_maintenance_type_create'),
     path('lookup_maintenance_type_update/<int:pk>/',
@@ -71,6 +83,7 @@ urlpatterns = [
          LookupMaintenanceTypeDeleteView.as_view(), name='lookup_maintenance_type_delete'),
 
     path('lookup_failure_node/', LookupFailureNodeListView.as_view(), name='lookup_failure_node'),
+    path('lookup_failure_node/<int:pk>/', LookupFailureNodeDetailView.as_view(), name='lookup_failure_node_detail'),
     path('lookup_failure_node_create', LookupFailureNodeCreateView.as_view(), name='lookup_failure_node_create'),
     path('lookup_failure_node_update/<int:pk>/',
          LookupFailureNodeUpdateView.as_view(), name='lookup_failure_node_update'),
@@ -78,6 +91,8 @@ urlpatterns = [
          LookupFailureNodeDeleteView.as_view(), name='lookup_failure_node_delete'),
 
     path('lookup_recovery_method/', LookupRecoveryMethodListView.as_view(), name='lookup_recovery_method'),
+    path('lookup_recovery_method/<int:pk>/',
+         LookupRecoveryMethodDetailView.as_view(), name='lookup_recovery_method_detail'),
     path('lookup_recovery_method_create',
          LookupRecoveryMethodCreateView.as_view(), name='lookup_recovery_method_create'),
     path('lookup_recovery_method_update/<int:pk>/',

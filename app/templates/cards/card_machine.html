@@ -58,16 +58,36 @@
             {% for machine in machine_filter.qs %}
             <tr>
                 <td>
-                    <a href="{% url 'machine_detail' machine.id %}">{{ machine.serial_number}}</a>
+                    <a href="{% url 'machine_detail' machine.id %}">{{ machine.serial_number }}</a>
                 </td>
-                <td>{{ machine.vehicle_model.name }}</td>
-                <td>{{ machine.engine_model.name }}</td>
+                <td>
+                    <a href="{% url 'lookup_vehicle_model_detail' machine.vehicle_model.id %}">
+                        {{ machine.vehicle_model.name }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'lookup_engine_model_detail' machine.engine_model.id %}">
+                        {{ machine.engine_model.name }}
+                    </a>
+                </td>
                 <td>{{ machine.engine_serial_number }}</td>
-                <td>{{ machine.transmission_model.name }}</td>
+                <td>
+                    <a href="{% url 'lookup_transmission_model_detail' machine.transmission_model.id %}">
+                        {{ machine.transmission_model.name }}
+                    </a>
+                </td>
                 <td>{{ machine.transmission_serial_number }}</td>
-                <td>{{ machine.drive_axle_model.name }}</td>
+                <td>
+                    <a href="{% url 'lookup_drive_axle_model_detail' machine.drive_axle_model.id %}">
+                        {{ machine.drive_axle_model.name }}
+                    </a>
+                </td>
                 <td>{{ machine.drive_axle_serial_number }}</td>
-                <td>{{ machine.steering_bridge_model.name }}</td>
+                <td>
+                    <a href="{% url 'lookup_steering_bridge_model_detail' machine.steering_bridge_model.id %}">
+                        {{ machine.steering_bridge_model.name }}
+                    </a>
+                </td>
                 <td>{{ machine.steering_bridge_serial_number }}</td>
 
                 <td>{{ machine.supply_contract }}</td>
